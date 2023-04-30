@@ -1,0 +1,527 @@
+<%- include('../layouts/userHeader.ejs')  %>
+
+
+
+        <!-- BANNER
+        ================================================== -->
+        <section class="p-0">
+            <div class="container-fluid px-0">
+                <div class="slider-fade1 owl-carousel owl-theme w-100">
+                    <% banner.forEach(ele => {%>
+                        
+                  
+                    <div class="item bg-img cover-background pt-6 pb-12 pt-sm-6 pb-sm-14 py-md-16 py-lg-20 py-xxl-24" data-overlay-dark="0" data-background="/products_img/<%= ele.bannerImage  %>">
+                        <div class="container pt-6 pt-sm-7 pt-md-0">
+                            <div class="row align-items-center justify-content-center caption">
+                                <div class="col-md-10 col-lg-8 col-xl-6 py-sm-6 position-relative">
+                                    <h1><%= ele.title  %></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%  }); %>
+        </section>
+
+        <!-- CATEGORY
+        ================================================== -->
+        <section>
+            <div class="container">
+                <div class="row g-3">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="position-relative categoty-style1">
+                            <div class="category-img">
+                                <a href="/category/643a2f030df3e0d8ee669d33" >
+                                <img style="height: 312px; background-size: cover; object-fit: cover;" class="w-100" src="/img/other/mencat.jpeg" alt="...">
+                            </a>
+                            </div>
+
+                            <div class="position-absolute bottom-0 start-0">
+                                <div class="w-100 p-4">
+                                    <h3 class="h6 text-dark bg-white px-3 py-2">
+                                        <a href="/category/643a2f030df3e0d8ee669d33" class="text-dark">Mens Hoodies</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="position-relative categoty-style1 mt-3">
+                            <div class="category-img">
+                                <a href="category/643e4427c786425eae6d313f">
+                                <img style="height: 312px; background-size: cover; object-fit: cover;" class="w-100" src="/img/other/kidscat.jpeg" alt="...">
+                           </a>
+                            </div>
+                            <div class="position-absolute bottom-0 start-0">
+                                <div class="w-100 p-4">
+                                    <h3 class="h6 text-dark bg-white px-3 py-2">
+                                        <a href="category/643e4427c786425eae6d313f" class="text-dark">Kids Hoodies</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-sm-3 order-lg-2">
+                        <div class="position-relative categoty-style1">
+                            <div class="category-img">
+                                <a href="/shop" >
+                                    <video width="100%"   
+                                    loop
+                                    autoplay
+                                    height="640"
+                                    muted="true"
+                                    preload="metadata"
+                                    poster="benefits-of-coding.jpg">
+                                        <source  src="/img/other/cathood.mp4" type="video/mp4">
+                                      </video>
+                          </a>
+                                </div>
+                            <div class="position-absolute top-0 end-0">
+                                <div class=" w-100 p-4">
+                                    <h3 class="setbg h6 text-dark bg-white px-3 py-2">
+                                        <a href="/shop" class="text-dark">HoodHub Collections</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="col-sm-6 col-lg-3 order-sm-2 order-lg-3">
+                        <div class="position-relative categoty-style1">
+                            <div class="category-img">
+                                <a href="/category/643a37b001cd4cf56db167b4">
+                                <img style="height: 312px; background-size: cover; object-fit: cover;" class="w-100" src="/img/other/womencat.jpg" alt="...">
+                            </a>
+                            </div>
+
+                            <div class="position-absolute bottom-0 start-0">
+                                <div class="w-100 p-4">
+                                    <h3 class="h6 text-dark bg-white px-3 py-2">
+                                        <a href="/category/643a37b001cd4cf56db167b4" class="text-dark">Womens Hoodies</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+               
+                        <div class="position-relative categoty-style1 mt-3">
+                            <div class="category-img">
+                                <a href="/category/64404a4308b228f8a2025eca" >
+                                <img style="height: 312px; background-size: cover; object-fit: cover;" class="w-100" src="/img/other/outfit.jpeg" alt="...">
+                            </a>
+                            </div>
+                            <div class="position-absolute bottom-0 start-0">
+                                <div class="w-100 p-4">
+                                    <h3 class="h6 text-dark bg-white px-3 py-2">
+                                        <a href="/category/64404a4308b228f8a2025eca" class="text-dark">Full  Outfit</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <img src="" class="position-absolute top-40 left d-none d-md-block" alt="..."> -->
+        </section>
+
+        <!-- SERVICES
+        ================================================== -->
+        <section class="pt-0 pb-0">
+            <div class="container">
+                <div class="row mt-n4">
+                    <div class="col-md-6 col-lg-4 mt-4">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <img src="img/icons/icon-1.png" alt="...">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">Free Shipping</h4>
+                                <p class="mb-0 w-lg-90">Please feel free to contact us and we provide best service.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mt-4">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <img src="img/icons/icon-2.png" alt="...">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">Secure Payment</h4>
+                                <p class="mb-0 w-lg-90">If you are not satisfied with product then we provide refunds.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mt-4">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <img src="img/icons/icon-3.png" alt="...">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h4 class="h5">Gift Voucher</h4>
+                                <p class="mb-0 w-lg-90">Shopping over ₹500 to ₹1000 get free gift voucher.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+
+        <!-- FEATURED PRODUCTS
+        ================================================== -->
+        <section>
+            <div class="container">
+                <div class="text-center mb-1-9 mb-lg-2-3 title-01">
+                    <h2 class="mb-0 h1">Featured Products</h2>
+                </div>
+                <div class="featured-product owl-carousel owl-theme">
+
+                    <% for (let i = 0; i < product.length; i++) { %>
+                        <div class="product-grid-three">
+                          <div class="product-img">
+                            <a href="/product_view?name=<%= product[i]._id %>">
+                              <img style="height: 391px; width: 100%; object-fit: cover;" src="<%= product[i].productImage[0] %>" alt="...">
+                            </a>
+                            <div class="wish-list">
+                                <% if(session){ %>
+                              <a type="submit"  onclick="addtowishlist('<%= product[i]._id  %>')"><i class="ti-heart"></i></a>
+                              <%}else{  %>
+                                <a href="/login"><i class="ti-heart"></i></a>
+                                <% } %>
+                            </div>
+                            <div class="action-butn">
+                             <% if(session){ %>
+                                <button type="button" style="padding: 0px;"
+                                onclick="addtocart('<%= product[i]._id %>','<%= product[i].price %>')"
+                                class="btn" ><a
+                                    style="text-decoration: none;"><i class="ti-shopping-cart"></i></a>
+                            </button>
+                            <a href="/product_view?name=<%= product[i]._id %>"><i class="ti-eye"></i></a>
+                                <% }else{ %>
+
+                                    <a href="/login"><i class="ti-shopping-cart"></i></a>
+                                    <a href="/product_view?name=<%= product[i]._id %>"><i class="ti-eye"></i></a>
+
+                                    <% } %>
+                             
+                            </div>
+                          </div>
+                          <h3 class="h6"><a href="shop-product-grid.html"><%= product[i].productname %></a></h3>
+                         
+                          <span class="font-weight-600 display-29 text-secondary" >₹<s><%= product[i].offer_price %></s></span>
+                          <span class="font-weight-600 display-29 text-secondary">₹<%= product[i].price %></span>
+                        
+                        </div>
+                      <% } %>
+
+                </div>
+            </div>
+      
+        </section>
+
+        <!-- OFFER BANNER
+        ================================================== -->
+        <section class="py-0">
+            <div class="container-fluid px-lg-1-9 px-xl-6 px-xxl-13">
+                <div class="row mt-n4">
+                    <div class="col-md-6 mt-4">
+                        <div class="offer-style02">
+                            <img src="img/other/abhome.jpeg" alt="...">
+                            <div class="text-center position-absolute top-50 translate-middle-y start-0 end-0">
+                                <h2 class="mb-xl-1-9 h3 " style="color: #ffae39;">If you want to Know our shop</h2>
+                                <a href="/aboutus" class="butn-style3 sm">Visit About us<span></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                        <div class="offer-style02">
+                            <img src="img/other/abhome2.png" alt="...">
+                            <div class="text-center position-absolute top-50 translate-middle-y start-0 end-0">
+                                <span class="font-weight-600 text-center text-primary display-25 mb-2 d-block highlight-font letter-spacing-2">Contact Our group</span>
+                                <h2 class="mb-xl-1-9 h3 " style="color: #ffffff;">We will help You AnyTime</h2>
+                                <a href="/contact" class="butn-style3 sm">Visit Contact us<span></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </section>
+
+        <!--  NEW ARRIVALS
+        ================================================== -->
+        <section class="pb-0">
+            <div class="container z-index-9 position-relative">
+                <div class="row mt-n1-9">
+                    
+                    <div class="col-md-6 col-lg-4 mt-1-9">
+                        <h4 class="h6 mb-1-9">Mens</h4>
+
+                        <% menscategory.forEach( men => {%>
+                            
+                     
+                        <div class="d-flex mb-4 border border-color-light-black">
+                            <div class="flex-shrink-0">
+                                <a href="/product_view?name=<%= men._id %>"> <img style="height:144px; width: 120px;"src="<%= men.productImage[0] %>" alt="...">
+                            </div>
+                            <div class="flex-grow-1 p-3">
+                                <h4 class="h6"><%= men.productname  %></a></h4>
+                                <div class="font-weight-700 display-29 mb-1">
+                                    <span class="text-primary">₹<%= men.offer_price  %></span>
+                                    <del>₹<%= men.price  %></del>
+                                </div>
+                                <a href="/category/643a2f030df3e0d8ee669d33" class="font-weight-700 border-bottom text-uppercase small">Shop Now</a>
+                            </div>
+                        </div>
+
+                   <% }); %>
+
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 mt-1-9">
+                        <h4 class="h6 mb-1-9">Womens</h4>
+
+                      <% womencategory.forEach( women => {%>
+                            
+                     
+                        <div class="d-flex mb-4 border border-color-light-black">
+                            <div class="flex-shrink-0">
+                                <img style="height:144px; width: 120px;"src="<%= women.productImage[0] %>" alt="...">
+                            </div>
+                            <div class="flex-grow-1 p-3">
+                                <h4 class="h6"><a href="/product_view?name=<%= women._id %>"><%= women.productname  %></a></h4>
+                                <div class="font-weight-700 display-29 mb-1">
+                                    <span class="text-primary">₹<%= women.offer_price  %></span>
+                                    <del>₹<%= women.price  %></del>
+                                </div>
+                                <a href="/category/643a37b001cd4cf56db167b4" class="font-weight-700 border-bottom text-uppercase small">Shop Now</a>
+                            </div>
+                        </div>
+
+                   <% }); %>
+
+                      
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 mt-1-9">
+                        <h4 class="h6 mb-1-9">Kids</h4>
+
+                     <% kidscategory.forEach( kid => {%>
+                            
+                        <div class="d-flex mb-4 border border-color-light-black">
+                            <div class="flex-shrink-0">
+                                <img style="height:144px; width: 120px;"src="<%= kid.productImage[0] %>" alt="...">
+                            </div>
+                            <div class="flex-grow-1 p-3">
+                                <h4 class="h6"><a href="/product_view?name=<%= kid._id %>"><%= kid.productname  %></a></h4>
+                                <div class="font-weight-700 display-29 mb-1">
+                                    <span class="text-primary">₹<%= kid.offer_price  %></span>
+                                    <del>₹<%= kid.price  %></del>
+                                </div>
+                                <a href="/category/643e4427c786425eae6d313f" class="font-weight-700 border-bottom text-uppercase small">Shop Now</a>
+                            </div>
+                        </div>
+
+                   <% }); %>
+                      
+                    </div>
+                </div>
+            </div>
+       
+        </section> 
+
+        <!-- BLOG
+        ================================================== -->
+        <section>
+            <div class="container-fluid px-lg-1-9 px-xl-6 px-xxl-13">
+                <div class="text-center mb-1-9 mb-lg-2-3 title-01">
+                    <h2 class="mb-0 h1">Latest Collection</h2>
+                </div>
+                <div class="row mt-n1-9">
+                    <div class="col-md-6 mt-1-9">
+                        <article class="row g-0 card-style1 align-items-center">
+                            <div class="col-xl-5 order-2 order-xl-1">
+                                <div class="p-1-9 card-body">
+                                    <span class="d-block mb-2 fw-bold text-secondary">Full Outfit</span>
+                                    <h3 class="h5 mb-4">We recently launched new "Full Outfit Hoodies".</h3>
+                                    <p>The new Full Outfit Hoodies are a game changer in the world of comfortable and stylish clothing. </p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <img src="img/other/outfit.png" class="rounded-box" alt="...">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h4 class="h6 text-capitalize mb-1"><a href="/category/64404a4308b228f8a2025eca">Full Outfit</a></h4>
+                                            <p class="mb-0">April 28, 2023</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 order-1 order-xl-2">
+                                <div class="card-image">
+                                    <img src="img/other/news.jpeg" alt="...">
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-md-6 mt-1-9">
+                        <article class="row g-0 card-style1 align-items-center">
+                            <div class="col-xl-5 order-2 order-xl-1">
+                                <div class="p-1-9 card-body">
+                                    <span class="d-block mb-2 fw-bold text-secondary">KIds's Hoodies</span>
+                                    <h3 class="h5 mb-4">Stay Warm and Stylish with our Kid's Hoodies Collection</h3>
+                                    <p>our kid's hoodies are the perfect addition to any child's wardrobe. With their combination of comfort and style .</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <img src="img/other/09 1.png" class="rounded-box" alt="...">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h4 class="h6 text-capitalize mb-1"><a href="/category/643e4427c786425eae6d313f">KIds's Hoodie</a></h4>
+                                            <p class="mb-0">April 25, 2023</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 order-1 order-xl-2">
+                                <div class="card-image">
+                                    <img src="img/other/news2.jpeg" alt="...">
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </dv>
+        </section>
+        <!-- CLIENTS
+        ================================================== -->
+        <div class="section-clients pt-0">
+            <div class="container">
+                <div class="owl-carousel owl-theme clients">
+                    <div class="item"><img src="img/partners/client-07.png" alt="..."></div>
+                    <div class="item"><img src="img/partners/client-08.png" alt="..."></div>
+                    <div class="item"><img src="img/partners/client-09.png" alt="..."></div>
+                    <div class="item"><img src="img/partners/client-10.png" alt="..."></div>
+                    <div class="item"><img src="img/partners/client-11.png" alt="..."></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEWSLETTER
+        ================================================== -->
+        <section class="bg-light pb-17 pb-lg-20 pb-xl-22">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 col-xl-5 text-center title-01">
+                        <h2 class="h1 mb-1-9 mb-lg-2-9">Newsletter</h2>
+                        <div class="subscribe-style2">
+                            <form method="post">
+                                <div class="form-group">
+                                    <input type="email" placeholder="Enter your email..." id="email" name="email" class="form-control">
+                                    <a href="#!" class="butn-style3">Subscribe<span></span></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- INSTAGRAM IMAGES
+        ================================================== -->
+        <section class="p-0 overflow-visible bg-transparent">
+            <div class="container-fluid px-lg-1-9 px-xl-6 px-xxl-13 insta-img">
+                <div class="row portfolio-gallery">
+                    <div class="col-sm-4 col-lg mb-4 mb-lg-0" data-src="img/other/08.png" data-sub-html="<h4 class='text-white'>#01</h4>">
+                        <div class="instagram-block">
+                            <img src="img/other/08.png" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg mt-lg-4 mb-4 mb-lg-0" data-src="img/other/06.png" data-sub-html="<h4 class='text-white'>#02</h4>">
+                        <div class="instagram-block">
+                            <img src="img/other/06.png" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg mb-4 mb-lg-0" data-src="img/other/010.png" data-sub-html="<h4 class='text-white'>#03</h4>">
+                        <div class="instagram-block">
+                            <img src="img/other/010.png" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg mt-lg-4 mb-4 mb-sm-0" data-src="img/other/011.png" data-sub-html="<h4 class='text-white'>#04</h4>">
+                        <div class="instagram-block">
+                            <img src="img/other/011.png" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg" data-src="img/other/03.png" data-sub-html="<h4 class='text-white'>#05</h4>">
+                        <div class="instagram-block">
+                            <img src="img/other/03.png" alt="...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <Script>
+     
+            function addtowishlist(proid) {
+                $.ajax({
+                    url: '/add_to_wishlist',
+                    data: {
+                        productId: proid
+                    },
+                    method: 'post',
+                    success: (response) => {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'added',
+                                text: 'product added to whilist',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer:1500
+                            })
+                        } else {
+                            Swal.fire({
+                                title: 'Already Exist',
+                                text: 'Product Already in Wishlist',
+                                icon: 'info',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                        }
+                    }
+                })
+            }
+            
+        function addtocart(proid, pro_price) {
+
+            $.ajax({
+                url: '/add_cart',
+                data: {
+                    productId: proid,
+                    price: pro_price
+                },
+                method: 'post',
+
+                success: (res) => {
+                    if (res.success) {
+                        Swal.fire({
+                            title: 'Added',
+                            text: 'product added to cart',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    } else {
+                        Swal.fire({
+                            title: 'Already Exist',
+                            text: 'Product Already in Cart',
+                            icon: 'info',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+
+                    }
+                }
+            })
+
+        }
+    </script>
+
+<%- include('../layouts/userFooter.ejs')  %>

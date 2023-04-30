@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from smartshop.websitelayout.net/shop-product-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Jan 2023 15:58:47 GMT -->
+
+<head>
+
+  <!-- metas -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- title  -->
+  <title>HoodHub</title>
+
+  <!-- favicon -->
+
+
+  <!-- plugins -->
+  <link rel="stylesheet" href="/css/plugins.css">
+
+  <!-- theme core css -->
+  <link href="/css/styles.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/login/style.css">
+</head>
+
+<body>
+
+
+
+	<div class="container">
+
+		
+		<h1><b >Sign In</b></h1>
+		<form method="post" class="row g-3 needs-validation" novalidate>
+		  <div class="col-md-12">
+			<div class="form-outline">
+			  <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Your Email" name="email"
+				required />
+			  <div class="invalid-feedback">Please Enter Email.</div>
+			</div>
+		  </div>
+		  <div class="col-md-12">
+			<div class="form-outline">
+			  <input type="password" class="form-control" id="validationCustom02" name="password"
+				placeholder="Enter Your Password" required />
+			  <div class="invalid-feedback">Please Enter Password</div>
+			</div>
+		  </div>
+	
+		  <div class="col-12">
+			<% if(typeof message !=='undefined' ){ %>
+	
+			  <div class="alert alert-warning alert-dismissible" role="alert">
+				<%= message %>
+			  </div>
+	
+		  </div>
+	
+		  <% } %>
+			<div class="col-12">
+	
+			  <button type="submit">Sign In</button>
+			</div>
+		</form>
+		
+		<div class="mt-3 mb-3"> 
+			<a href="/forget">Forget Password |</a>
+		<a href="/sendotp">Login with number</a>
+		
+		</div>
+		<span>Don't have an account ? <a style="text-decoration: none;" href="/signup">Create Account</a></span>
+		<br>
+	
+	
+	  </div>
+	
+	  <script>
+	
+		(() => {
+		  'use strict';
+	
+	
+		  const forms = document.querySelectorAll('.needs-validation');
+	
+	
+		  Array.prototype.slice.call(forms).forEach((form) => {
+			form.addEventListener('submit', (event) => {
+			  if (!form.checkValidity()) {
+				event.preventDefault();
+				event.stopPropagation();
+			  }
+			  form.classList.add('was-validated');
+			}, false);
+		  });
+		})();
+	  </script>
+
+
+<!-- all js include start -->
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- popper js -->
+<script src="/js/popper.min.js"></script>
+
+<!-- bootstrap -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- core.min.js -->
+<script src="/js/core.min.js"></script>
+
+<!-- zoom js -->
+<script src="/js/xzoom.js"></script>
+
+<!-- hammer js -->
+<script src="/js/jquery.hammer.min.js"></script>
+
+<!-- setup js -->
+<script src="/js/setup.js"></script>
+
+<!-- custom scripts -->
+<script src="/js/main.js"></script>
+
+<!-- all js include end -->
+
+</body>
+
+
+<!-- Mirrored from smartshop.websitelayout.net/shop-product-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Jan 2023 15:59:12 GMT -->
+
+</html>

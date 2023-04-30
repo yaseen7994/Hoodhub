@@ -1,0 +1,109 @@
+<%- include('../layouts/adminHeader.ejs')  %>
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Banner/</span> Edit Banner</h4>
+
+    <!-- Basic Layout & Basic with Icons -->
+    <div class="row">
+      <!-- Basic Layout -->
+      <div class="col-xxl">
+        <div class="card mb-4">
+          <br>
+          <div class="card-body">
+            <form method="post" class="row g-3 needs-validation" novalidate enctype="multipart/form-data">
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">caption </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= banneredit.caption %>" name="caption" id="basic-default-name" placeholder=""
+                    required />
+                  <div class="invalid-feedback">Please Enter Banner caption </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">title </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= banneredit.title %>" name="title" id="basic-default-name" placeholder=""
+                    required />
+                  <div class="invalid-feedback">Please Enter Banner Title </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name"> sub title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= banneredit.sub_title %>" name="sub_title" id="basic-default-name" placeholder=""
+                    required />
+                  <div class="invalid-feedback">Please Enter Sub Title</div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="formFile" class="col-sm-2 col-form-label">Image </label>
+                <div class="col-sm-10">
+              <%if(banneredit.bannerImage){ %>
+               
+               <div class="mb-2"> <i class='bx bx-bell bx-xs' style="color: red;" ></i> <span style="color: red;">If you want to add new image you need to delete this image </span></div>
+                <div class="d-flex" style="flex-direction: column; float: left;margin-right: 15px;">
+                  <img height="150px" width="150px" src="/products_img/<%= banneredit.bannerImage %>" alt="">
+
+                  <a class="btn btn-sm btn-secondary" href="">
+                    <i class="bx bx-trash me-1 sm"></i>
+                    Delete</a>
+                </div>
+            <%  }else{ %>
+
+                <div class="col-sm-10">
+                    <input class="form-control" type="file" id="formFile"   name="image" required />
+                    <div class="invalid-feedback">Please Choose a image</div>
+                </div>
+<% }%>
+                </div>
+                </div>
+              
+
+              
+
+              <div class="row justify-content-end">
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary">submit</button>
+
+                  <% if(typeof message !=='undefined' ){ %>
+
+                    <p style="color: rgb(100, 0, 0);">
+                      <%= message %>
+                    </p>
+                    <% } %>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- / Content -->
+  <script>
+    (() => {
+      'use strict';
+
+
+      const forms = document.querySelectorAll('.needs-validation');
+
+
+      Array.prototype.slice.call(forms).forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+
+
+<%- include('../layouts/adminFooter.ejs') %>

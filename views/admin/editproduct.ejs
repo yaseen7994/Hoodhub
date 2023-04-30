@@ -1,0 +1,114 @@
+<%- include('../layouts/adminHeader.ejs')  %>
+
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product/</span>Edit Product </h4>
+
+  <!-- Basic Layout & Basic with Icons -->
+  <div class="row">
+    <!-- Basic Layout -->
+    <div class="col-xxl">
+      <div class="card mb-4">
+        <br>
+        <div class="card-body">
+          <form method="post" action="" enctype="multipart/form-data">
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-name">Product Name</label>
+              <div class="col-sm-10">
+                <input type="text" name="name" class="form-control" id="basic-default-name"
+                  value="<%= product.productname %>" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-company">Category</label>
+              <div class="col-sm-10">
+                <select id="Select Category" name="category" class="form-select">\
+                  <option value="<%= product.category._id  %>"><%= product.category.category_name  %></option>
+                  
+                  <% if(category.length> 0){
+
+                    for(let i=0; i<category.length; i++){ %>
+                      <option value="<%=category[i]._id %>" ><%= category[i].category_name %>
+                      </option>
+                      <% }} %>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-email"> Price</label>
+              <div class="col-sm-10">
+                <input type="tel" name="offerprice" id="basic-default-phone" value="<%= product.offer_price %>"
+                  class="form-control phone-mask" />
+                </div>
+              </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-email">Offer Price</label>
+              <div class="col-sm-10">
+                <div class="input-group input-group-merge">
+                  <input type="tel" id="basic-default-email" value="<%= product.price %>" class="form-control"
+                    name="price" />
+                </div>
+              </div>
+        
+            </div>
+            
+           
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-phone"> Quantity </label>
+              <div class="col-sm-10">
+                <input type="tel" name="quantity" id="basic-default-phone" value="<%= product.quantity %>"
+                  class="form-control phone-mask" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-message">Description</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="description" value="<%= product.description %>"
+                  id="basic-default-message">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="formFile" class="col-sm-2 col-form-label">Image </label>
+              <div class="col-sm-10">
+               
+                <%for(let i = 0; i<product.productImage.length;i++){ %>
+                  <div class="d-flex" style="flex-direction: column; float: left;margin-right: 15px;">
+                    <img height="150px" width="150px" src="<%= product.productImage[i] %>" alt="">
+              
+                  <a class="btn btn-sm btn-secondary" href="/admin/deleteimage?index=<%=i%>&productId=<%=product.id%>">
+                    <i class="bx bx-trash me-1 sm"></i>
+                    Delete</a>
+                  </div>
+              <%  } %>
+                
+
+              </div>
+            </div>
+            <br>
+            <% if(product.productImage.length <4){%>
+            <div class="row mb-3">
+              <label for="formFile" class="col-sm-2 col-form-label">upload Image </label>
+              <div class="col-sm-10">
+                <input class="form-control disabling" type="file" multiple    id="formFile" name="image" 
+                 />
+                 <div class="invalid-feedback">Please choose  photos</div>
+              </div>
+            </div>
+                 <%}%>
+                  
+               
+               
+            <div class="row justify-content-end">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+<%- include('../layouts/adminFooter.ejs')  %>

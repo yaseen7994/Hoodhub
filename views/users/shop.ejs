@@ -1,0 +1,261 @@
+<%- include('../layouts/userHeader.ejs')  %>
+
+  
+<div class="main-wrapper mp-pusher" id="mp-pusher">
+
+    
+    
+
+    <!-- PAGE TITLE
+    ================================================== -->
+    <section class="page-title-section bg-img cover-background" data-background="/img/other/shop5.png">
+        <div class="container">
+
+            <div class="title-info">
+                <h1>
+                    <%= category_name %>
+                </h1>
+            </div>
+            <div class="breadcrumbs-info">
+                <ul class="ps-0">
+                    <li><a href="home-shop-1.html">Home</a></li>
+                    <li><a href="#">
+                            <%= category_name %>
+                        </a></li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CATEGORY MP-MENU
+    ================================================== -->
+   
+    
+    <!-- PRODUCT GRID
+    ================================================== -->
+    <section class="md">
+        <div class="container">
+            <div class="row">
+
+                <!-- sidebar panel -->
+                <div class="col-lg-3 col-12 side-bar order-2 order-lg-1">
+                    
+                    <div class="widget search p-0">
+                         <form class="search-form" action="/search" method="post">
+                        <input type="text" class="price" name="s" value="" placeholder="Type here ...">
+                        <button type="submit" class="butn-style2 small ">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                    </div>
+
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h5>Categories</h5>
+                        </div>
+                        <div id="accordion" class="accordion-style2">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <a class="btn btn-link mt-3" href="/shop"  >All Products</a>  
+                             <% if(category.length>0){
+                                for(let i=0 ; i<category.length ; i++) {%>   
+                                           
+                                <a class="btn btn-link mt-3" href="/category/<%= category[i]._id %>"  ><%= category[i].category_name %></a>
+                                <% }}else{ %>
+                                    <a class="btn btn-link mt-3" href="/category/<%= category[i]._id %>" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Not found Category </a>
+                               <% } %>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="offer-slider owl-carousel owl-theme">
+                                <% coupon.forEach(x=> { %>
+                                    <div class="offer-banner-slider"
+                                        style="background-image:url(img/offer-banner/offer-slide-01.jpg);">
+                                        <div class="offer-text">
+                                            <h6 class="mb-1 text-white font-weight-500">
+                                                <%= x.coupon_name %>
+                                            </h6>
+
+                                            <h4 class="font-weight-500"><a href="#">Up to <%= x.discountpercentage %>%
+                                                        Off</a></h4>
+                                            <p>
+                                                <%= x.description%>
+                                            </p>
+                                            <a class="butn-style1 fill small" href="#"><span>Buy Now</span></a>
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                            </div>
+
+            
+                    <div class="widget">
+
+                        <div class="widget-title">
+                            <h5>Filter by Price</h5>
+                        </div>
+
+                        <ul class="list-discount list-unstyled">
+
+                            <li class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" value="" id="ten_pecentage">
+                                <label class="form-check-label" for="ten_pecentage">₹1000 - ₹2000</label>
+                            </li>
+
+                            <li class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" value="" id="twenty_pecentage">
+                                <label class="form-check-label" for="twenty_pecentage">₹2000 - ₹3000</label>
+                            </li>
+
+                            <li class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" value="" id="thirty_pecentage">
+                                <label class="form-check-label" for="thirty_pecentage">₹3000 - ₹4000</label>
+                            </li>
+
+                            <li class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" value="" id="fourty_pecentage">
+                                <label class="form-check-label" for="fourty_pecentage">₹4000 - ₹5000</label>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    
+
+                </div>
+    
+                <div class="col-lg-9 col-12 ps-lg-1-9 order-1 order-lg-2 mb-1-9 mb-lg-0">
+
+                    <div class="row g-0 align-items-center bg-light rounded p-3 mb-1-9">
+
+                        <div class="col-12 col-md my-1 my-md-0 text-center text-md-start font-weight-600"> Showing <%= product.length %> results</div>
+
+                        <div class="col-12 col-md-auto">
+
+                            <div class="row justify-content-center">
+
+                                <div class="col-auto my-1 my-md-0">
+                                    <label class="m-0">Show:</label>
+                                    <select class="w-auto d-inline-block form-select">
+                                        <option value="#?limit=24" selected="selected">24</option>
+                                        <option value="#?limit=25">25</option>
+                                        <option value="#?limit=50">50</option>
+                                    
+                                    </select>
+                                </div>
+
+                                <div class="col-auto my-1 my-md-0">
+                                    <label class="m-0">Sort By:</label>
+                                    <select class="w-auto d-inline-block form-select">
+                                        <option value="#?sort=p.sort_order&amp;order=ASC">Default</option>
+                                        
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row ">
+                        <% if(product.length> 0){
+                        for(let i=0; i<product.length; i++){ %>
+
+                        <div class="col-11 col-sm-6 col-xl-4 mb-1-9">
+                            <div class="product-grid">
+                                <div class="product-img">
+                                  <a href="/product_view?name=<%= product[i]._id %>">
+                                        <div class="label-offer "></div><img style="height: 300px; width: 90%; object-fit: cover;" src="<%= product[i].productImage[0] %>" alt="..."></a>
+                                </div>
+                                <div class="product-description">
+                                    <h3><a href="/product_view?name=<%= product[i]._id %>"><%= product[i].productname %></a></h3>
+                                    <h4 class="price">
+                                                    <span class="regular-price line-through">₹ <%= product[i].offer_price %></span>
+                                                    <span class="offer-price">₹ <%= product[i].price %></span>
+                                                </h4>
+                                </div>
+                                <div class="product-buttons">
+                                    <ul class="ps-0">
+                                      <%if(session) {%>
+                                        <li><a href="#" class="btn-link" title="Add To Wishlist"><i class="far fa-heart"></i></a></li>
+                                        <li><button  type="button"
+                                                                    onclick="addtocart('<%= product[i]._id %>','<%= product[i].price %>')"
+                                                                    class="btn btn-link" >Add to
+                                                                    Cart</button></li>
+                                        <% }else{%>
+                                            <li><a href="#" class="btn-link" title="Add To Wishlist"><i class="far fa-heart"></i></a></li>
+                                        <li><a href="/login"  class="btn btn-link" >Add to Cart</a></li>
+                                        <%}%>
+                                        <li><a href="#" class="btn-link" title="View product"><i class="ti-eye"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <% }}%>
+                    </div>
+
+                    <!-- pagination -->
+                    <div class="pagination text-small text-uppercase text-extra-dark-gray mt-4">
+                                <ul>
+                                   
+                                    <% for(let i=1;i<=countpro;i++){%>
+                                        <li class="active"><a href="?page=<%=i%>">
+                                                <%=i%>
+                                            </a></li>
+                                        <% }%>
+                                           
+                                </ul>
+                            </div>
+                    
+                </div>
+                <!-- end right panel section -->
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function addtocart(proid, pro_price) {
+
+$.ajax(
+    {
+    url: '/add_cart',
+    data: {
+        productId: proid,
+        price: pro_price
+    },
+    method: 'post',
+
+    success: (res) => {
+        if (res.success) {
+            Swal.fire({
+                title: 'Added',
+                text: 'product added to cart',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        } else {
+            Swal.fire({
+                title: 'Already Exist',
+                text: 'Product Already in Cart',
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 1000
+            })
+
+        }
+
+    }
+})
+
+}
+</script>
+    
+
+
+<%-include('../layouts/userFooter.ejs')  %>

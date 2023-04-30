@@ -1,0 +1,195 @@
+<%- include('../layouts/adminHeader.ejs') %>
+
+
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4">Order list</h4>
+
+      <!-- Basic Bootstrap Table -->
+      <div class="card">
+        <br>
+        <div class="table-responsive text-nowrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Users</th>
+                <th>Order Id</th>
+                <th>payment </th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(order.length> 0){ %>
+                <% order.forEach((x,index)=> {
+                  %>
+
+
+                  <tr>
+                    <td>
+                      <%= index+1 %>
+                    </td>
+                    <td><strong>
+                        <%= x.userId.name %>
+                      </strong></td>
+
+                    <td><strong>
+                        <%= x.orderId %>
+                      </strong></td>
+                    <td><strong>
+                        <%= x.paymentType %>
+                      </strong></td>
+                    <% if(x.status=="Delivered" || x.status=='Cancelled' ){ %>
+                      <td><strong>
+                          <%= x.status %>
+                        </strong></td>
+                      <% }else if (x.status=='Confirmed' ){ %>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i>
+                                <%= x.status %>
+                              </i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" onclick="updateStatus('<%= x._id %>', 'Processing')">
+                                <i class="me-1"></i>Processing
+                              </a>
+                              <a class="dropdown-item" onclick="updateStatus('<%= x._id %>', 'Shipped')">
+                                <i class="me-1"></i>Shipped
+                              </a>
+                              <a class="dropdown-item" onclick="updateStatus('<%= x._id %>', 'Delivered')">
+                                <i class="me-1"></i>Delivered
+                              </a>
+                            </div>
+                          </div>
+                        </td>
+                        <% }else if (x.status=='Processing' ){ %>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                data-bs-toggle="dropdown">
+                                <i>
+                                  <%= x.status %>
+                                </i>
+                              </button>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item" onclick="updateStatus('<%= x._id %>', 'Shipped')">
+                                  <i class="me-1"></i>Shipped
+                                </a>
+                                <a class="dropdown-item" onclick="updateStatus('<%= x._id %>', 'Delivered')">
+                                  <i class="me-1"></i>Delivered
+                                </a>
+                              </div>
+                            </div>
+                          </td>
+                          <% }else if (x.status=='Shipped' ){ %>
+                            <td>
+                              <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                  data-bs-toggle="dropdown">
+                                  <i>
+                                    <%= x.status %>
+                                  </i>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" onclick="updateStatus('<%= x._id %>', 'Delivered')">
+                                    <i class="me-1"></i>Delivered
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                            <% }else if(x.status=='Return Pending' ){%>
+
+                              <td>
+                                <div class="dropdown">
+                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                    data-bs-toggle="dropdown">
+                                    <i>
+                                      <%= x.status %>
+                                    </i>
+                                  </button>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" onclick="returnOrder('<%= x._id %>', 'Return')">
+                                      <i class="me-1"></i>Confirm
+                                    </a>
+                                  </div>
+                                </div>
+                              </td>
+                              <% }else{%>
+                                <td>
+                                  <strong>
+                                    <%= x.status %>
+                                  </strong>
+                                </td>
+
+                                <% }%>
+                                  <td><a class="dropdown-item" href="/admin/view-order?id=<%= x._id %>">
+                                      <i class="bx bx-show me-1"></i> view </a>
+                                  </td>
+                  </tr>
+                  <% }) } else{ %>
+                    <tr>
+                      <td colspan="5">no orders</td>
+                    </tr>
+                    <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+     
+
+      <hr class="my-5" />
+
+    <script>
+      function updateStatus(orderId, status) {
+
+        $.ajax({
+          url: '/admin/update_status',
+          data: {
+            order_Id: orderId,
+            status: status
+
+          },
+
+          method: 'post',
+          success: (response) => {
+            if (response.success) {
+
+              location.href = '/admin/list-order'
+
+            }
+          }
+        })
+      }
+
+      function returnOrder(orderId, status) {
+        $.ajax({
+          url: '/admin/confirm_return',
+          data: {
+            order_Id: orderId,
+            status: status
+
+          },
+
+          method: 'post',
+          success: (response) => {
+            if (response.success) {
+
+              location.href = '/admin/list-order'
+
+            }
+          }
+        })
+
+      }
+    </script>
+
+
+
+
+
+
+
+<%- include('../layouts/adminFooter.ejs') %>
