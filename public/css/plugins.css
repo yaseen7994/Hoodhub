@@ -36678,6 +36678,8 @@ header {
   }
 }
 @media screen and (max-width: 991px) {
+ 
+
   .navbar-header-custom {
     padding: 4px 0 8px;
   }
@@ -36854,15 +36856,31 @@ header {
   .navbar-nav .has-sub .has-sub .submenu-button:before {
     top: 16px;
   }
+
+
+ 
+  .navbar-toggler:after{
+    
+  }
+  .navbar-toggler.menu-opened:before{
+    background: #6f4f9e;
+  }
+  .navbar-toggler.menu-opened:after{
+    background: #6f4f9e;
+  }
+
+
+
+
   .navbar-toggler {
-    background: #232323;
+    background: none;
     width: 45px;
     height: 40px;
     padding: 0;
     border-radius: 0;
     position: absolute;
-    right: 15px;
-    top: 38px;
+    right: 70px;
+    top: 16px;
     cursor: pointer;
     z-index: 12399994;
     border: none;
@@ -36874,8 +36892,8 @@ header {
     display: block;
     height: 8px;
     width: 20px;
-    border-top: 2px solid #fff;
-    border-bottom: 2px solid #fff;
+    border-top: 2px solid #6f4f9e;
+    border-bottom: 2px solid #6f4f9e;
     content: "";
   }
   .navbar-toggler:before {
@@ -36888,7 +36906,7 @@ header {
     display: block;
     height: 2px;
     width: 20px;
-    background: #fff;
+    background: #6f4f9e;
     content: "";
   }
   .navbar-toggler.menu-opened:after {
@@ -36899,7 +36917,7 @@ header {
     border: 0;
     height: 2px;
     width: 19px;
-    background: #fff;
+    background: #6f4f9e;
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -36908,7 +36926,7 @@ header {
   }
   .navbar-toggler.menu-opened:before {
     top: 20px;
-    background: #fff;
+    background: #6f4f9e;
     width: 19px;
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
@@ -37035,7 +37053,22 @@ header {
 }
 @media screen and (max-width: 575px) {
   .navbar-toggler {
-    top: 28px;
+    top: 15px;
+    right: 65px;
+    background: none;
+  }
+  .navbar-toggler:before{
+    background: #6f4f9e;
+  }
+  .navbar-toggler:after{
+    border-top: 2px solid #6f4f9e;
+    border-bottom: 2px solid #6f4f9e;
+  }
+  .navbar-toggler.menu-opened:before{
+    background: #6f4f9e;
+  }
+  .navbar-toggler.menu-opened:after{
+    background: #6f4f9e;
   }
   .navbar-nav {
     top: 75px;

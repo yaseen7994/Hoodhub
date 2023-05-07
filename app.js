@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
-
+const adminRoute = require('./routes/adminRoute')
+const useRoute = require('./routes/userRoute')
+const usercontroll = require('./controllers/userController')
 mongoose.connect(process.env.MONGO) 
 
 // express------------>
@@ -39,12 +41,12 @@ const path = require('path')
 app.use(express.static(path.join(__dirname,'public')))
 
 // For User route------------->
-const useRoute = require('./routes/userRoute')
 app.use('/',useRoute)
 
 // For admin route-------------> 
-const adminRoute = require('./routes/adminRoute')
 app.use('/admin',adminRoute)
+
+
 
 
 

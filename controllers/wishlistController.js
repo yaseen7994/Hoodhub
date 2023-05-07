@@ -22,7 +22,7 @@ try {
 
 } catch (error) {
     res.render('500')
-    console.log(error);
+    // console.log(error);
 }
 }
 
@@ -42,7 +42,7 @@ const add_wishlist = async(req,res)=>{
         }
     } catch (error) {
         res.render('500')
-        console.log(error);
+        // console.log(error);
     }
 }
 
@@ -54,7 +54,7 @@ const remove_from_wishlist = async(req,res)=>{
         res.json({success:true})
     } catch (error) {
         res.render('500')
-        console.log(error);
+        // console.log(error);
     }
 }
 
@@ -85,7 +85,7 @@ const add_to_cart = async (req, res) => {
 
     } catch (error) {        
         res.render('500');
-        console.log(error.message); 
+        // console.log(error); 
     }
 }
 

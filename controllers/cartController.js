@@ -2,6 +2,7 @@ const User = require('../Models/userModel')
 const Product = require('../Models/productModel')
 const Category = require('../Models/categoryModel')
 const Order = require('../Models/orderModel')
+const baritems = require('../controllers/bar')
 
 const show_cart = async (req, res) => {
     try {
@@ -14,11 +15,11 @@ const show_cart = async (req, res) => {
         const cart = product.cart
 
         
-        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session)
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(id)
         res.render('cart', { product, cart, totel, user, category,session:id,wishbox,wishlistLength });
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.render('500')
     }
 }
@@ -50,7 +51,7 @@ const add_cart = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.render('500')
     }
 }
@@ -67,7 +68,7 @@ const delete_cart = async (req, res) => {
         console.log("okk");
         await user.save();
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.render('500')
     }
 }
@@ -107,7 +108,7 @@ const Qtychange = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.render('500')
     }
 }

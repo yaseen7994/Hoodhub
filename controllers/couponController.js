@@ -9,7 +9,7 @@ const loadaddcoupon = async(req,res)=>{
         const admin = req.session.admin_id
         res.render('addcoupon',{user:admin})
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.render('500')
     }
 }
@@ -70,7 +70,7 @@ const addcoupon = async(req,res)=>{
         }
       }
     } catch (error) {
-       console.log(error); 
+      //  console.log(error); 
        res.render('500')
     }
 }
@@ -81,7 +81,7 @@ const couponlist = async(req,res)=>{
         const coupon = await Coupon.find()
         res.render('couponlist',{coupon,user})
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.render('500')
     }
 }
@@ -93,7 +93,7 @@ const editcoupon = async(req,res)=>{
         res.render('editcoupon',{coupon})
     } catch (error) {
       res.render('500')
-      console.log(error);
+      // console.log(error);
     }
 }
 
@@ -154,7 +154,7 @@ const editingcoupon = async (req, res) => {
   
       res.redirect("/admin/couponlist");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.render('500')
     }
   
@@ -168,7 +168,7 @@ const editingcoupon = async (req, res) => {
       res.json({ success: true })
     } catch (error) {
   
-      console.log(error);
+      // console.log(error);
     }
   }
 
@@ -178,7 +178,7 @@ const editingcoupon = async (req, res) => {
       const coupon = await Coupon.deleteOne({ _id: id });
       res.json({ success: true });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.render('500')
     }
   };
