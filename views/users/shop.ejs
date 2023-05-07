@@ -19,7 +19,7 @@
             <div class="breadcrumbs-info">
                 <ul class="ps-0">
                     <li><a href="home-shop-1.html">Home</a></li>
-                    <li><a href="#">
+                    <li><a href="/shop">
                             <%= category_name %>
                         </a></li>
                 </ul>
@@ -137,22 +137,17 @@
 
                             <div class="row justify-content-center">
 
-                                <div class="col-auto my-1 my-md-0">
-                                    <label class="m-0">Show:</label>
-                                    <select class="w-auto d-inline-block form-select">
-                                        <option value="#?limit=24" selected="selected">24</option>
-                                        <option value="#?limit=25">25</option>
-                                        <option value="#?limit=50">50</option>
-                                    
-                                    </select>
-                                </div>
+                            
 
                                 <div class="col-auto my-1 my-md-0">
-                                    <label class="m-0">Sort By:</label>
-                                    <select class="w-auto d-inline-block form-select">
-                                        <option value="#?sort=p.sort_order&amp;order=ASC">Default</option>
-                                        
-                                    </select>
+                            <label class="m-0">Sort By:</label>
+                                <select class="w-auto d-inline-block form-select" onchange="this.form.submit()">
+                                <option value="?sort=p.sort_order&amp;order=ASC">Default</option>
+                                <option value="?value=az">A-Z</option>
+                                <option value="?value=za">Z-A</option>
+                                <option value="?value=high">Price: High to Low</option>
+                                <option value="?value=low">Price: Low to High</option>
+                                </select>
                                 </div>
 
                             </div>
@@ -181,16 +176,16 @@
                                 <div class="product-buttons">
                                     <ul class="ps-0">
                                       <%if(session) {%>
-                                        <li><a href="#" class="btn-link" title="Add To Wishlist"><i class="far fa-heart"></i></a></li>
+                                        <li><a type="submit"  onclick="addtowishlist('<%= product[i]._id  %>')" class="btn-link" title="Add To Wishlist"><i class="far fa-heart"></i></a></li>
                                         <li><button  type="button"
                                                                     onclick="addtocart('<%= product[i]._id %>','<%= product[i].price %>')"
                                                                     class="btn btn-link" >Add to
                                                                     Cart</button></li>
                                         <% }else{%>
-                                            <li><a href="#" class="btn-link" title="Add To Wishlist"><i class="far fa-heart"></i></a></li>
+                                            <li><a href="/login" class="btn-link" title="Add To Wishlist"><i class="far fa-heart"></i></a></li>
                                         <li><a href="/login"  class="btn btn-link" >Add to Cart</a></li>
                                         <%}%>
-                                        <li><a href="#" class="btn-link" title="View product"><i class="ti-eye"></i></a></li>
+                                        <li><a href="/product_view?name=<%= product[i]._id %>" class="btn-link" title="View product"><i class="ti-eye"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -254,6 +249,36 @@ $.ajax(
 })
 
 }
+
+function addtowishlist(proid) {
+                $.ajax({
+                    url: '/add_to_wishlist',
+                    data: {
+                        productId: proid
+                    },
+                    method: 'post',
+                    success: (response) => {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'added',
+                                text: 'product added to whilist',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer:1500
+                            })
+                        } else {
+                            Swal.fire({
+                                title: 'Already Exist',
+                                text: 'Product Already in Wishlist',
+                                icon: 'info',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                        }
+                    }
+                })
+            }
+            
 </script>
     
 

@@ -8,7 +8,8 @@ cloudinary.config({
     api_key: "452783757644622",
     api_secret: "Jwkhc8ATV-P97soRkXLEZVCEHto"
   });
-  
+
+  const baritems = require('../controllers/bar') 
 
 
 const loadAddproduct = async(req,res)=>{
@@ -218,12 +219,9 @@ const loadshop = async (req, res) => {
         const category = await Category.find({})
         const coupon = await Coupon.find({active:true})
 
-        let cartbox = []
-      const productcart = await User.findOne({ _id: session }).populate('cart.product')
-      if (productcart && productcart.cart) {
-          cartbox = productcart.cart.slice(0,3)
-      }
-        res.render('shop', {session,user,category,category_name,countpro,coupon,product,cartbox})
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
+
+        res.render('shop', {session,user,category,category_name,countpro,coupon,product,cartbox,cartlength,wishbox,wishlistLength})
     } catch (error) {
         console.log(error); 
         res.render('500')
@@ -258,12 +256,8 @@ const loadbycategory = async (req, res) => {
         .exec()
         const count_product = await Product.find().countDocuments()
         let countpro = Math.ceil(count_product / limit)
-        let cartbox = []
-      const productcart = await User.findOne({ _id: session }).populate('cart.product')
-      if (productcart && productcart.cart) {
-          cartbox = productcart.cart.slice(0,3)
-      }
-        res.render('shop', { product,  category_name,cartbox, user, category, countpro ,coupon,session })
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
+        res.render('shop', { product,  category_name,cartbox, user, category, countpro ,coupon,session,wishbox,wishlistLength,cartlength })
 
     } catch (error) {
        
@@ -272,36 +266,45 @@ const loadbycategory = async (req, res) => {
 
     }
 }
-
 const sort = async (req, res) => {
     try {
-        let user;
-        if (req.session.user_id) {
-            user = true;
-        } else {
-            user = false;
+        let page = 1 
+        if(req.query.page){
+           page = req.query.page
+
         }
-        const sort_value = req.query.value
-        const category = await Category.find({});
-        if(sort_value == "az"){
-            const product = await Product.find({}).sort({ product_name: -1 });
-            res.render("shop", { product, user });
-        }else if(sort_value== "za"){
-            const product = await Product.find({}).sort({ product_name: -1 });
-            res.render("shop", { product, user });
-        }else if(sort_value == "high"){
-            const product = await Product.find({}).sort({ product_name: -1 });
-              res.render("shop", { product, user });
-        }else if(sort_value == "low"){
-            const product = await Product.find({}).sort({ product_name: -1 });
-            res.render("shop", { product, user ,category });
-        }
-        
+        let limit = 10
+        let user 
+       if(req.session.user_id){
+           user =true
+       }else{
+           user = false
+       }
+       
+      const sortValue = req.query.value;
+      let product;
+      if (sortValue == "az") {
+        product = await Product.find({}).sort({ productname: 1 });
+      } else if (sortValue == "za") {
+        product = await Product.find({}).sort({ productname: -1 });
+      } else if (sortValue == "high") {
+        product = await Product.find({}).sort({ price: -1 });
+      } else if (sortValue == "low") {
+        product = await Product.find({}).sort({ price: 1 });
+      } else {
+        product = await Product.find({});
+      }
+      res.render("product-list", { product, user });
     } catch (error) {
-        res.render('500');
-        console.log(error);
+      res.render("500");
+      console.log(error);
     }
-};
+  };
+
+
+
+
+
 
 const product_view = async (req, res) => {
     try {
@@ -315,13 +318,9 @@ const product_view = async (req, res) => {
         const products = await Product.find().limit(5); 
         const category = await Category.find({});
         const product = await Product.find({ _id: req.query.name });
-        let cartbox = []
-      const productcart = await User.findOne({ _id: session }).populate('cart.product')
-      if (productcart && productcart.cart) {
-          cartbox = productcart.cart.slice(0,3)
-      }
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
     
-        res.render("productdetails", { product, user, category, products,session:req.session.user_id ,cartbox});
+        res.render("productdetails", { product, user, category, products,session:req.session.user_id ,wishbox,wishlistLength,cartbox,cartlength});
     } catch (error) {
         console.log(error);
         res.render('500')
@@ -341,5 +340,5 @@ module.exports={
     product_view,
     search_product,
     loadbycategory,
-    sort
+    sort,
 }

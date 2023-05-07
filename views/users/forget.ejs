@@ -21,6 +21,7 @@
 
   <!-- theme core css -->
   <link href="/css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/plugin.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
     crossorigin="anonymous"></script>
@@ -32,61 +33,59 @@
 
 <body>
 
+  <div class="preloader"></div>
 
-
-	<div class="nevhead">
-
-    </div>
-  
-    <div class="container">
-    
-      <h5 class="mb-4">
-        Forget Your Password
-      </h5>
-     
-
-      
-<form method="post" action="/verifyOtp" class="row g-3 needs-validation" novalidate>
-  <div class="col-md-12">
-    <div class="form-outline">
-      <input type="text" class="form-control" id="validationCustom01" name="password" placeholder="Enter Your otp" required />
-      <div class="invalid-feedback">
-        <% if(typeof errorMessage !=='undefined' ){  %>
-        <%= errorMessage %>
-        <% } else { %>
-        Please Enter Password
+  <div class="container">
+    <h5 >Forgot Password</h5>
+      <h6 class="mb-4">
+        Enter your email address and reset your password
+      </h6>
+      <form method="post" action="" onsubmit="return validateSubmit()" class="row g-3 needs-validation" novalidate>
+     <div class="col-md-12">
+      <div class="form-outline">
+      <input class="signup-input" id="email" type="email" name="email" placeholder="Enter Email" required>
+      <p class=" error" style="color: darkred;"></p>
+      <% if(typeof message !=='undefined' ){ %>
+        <div style="color: darkred;">
+          <%= message %>
+        </div>
         <% } %>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-12">
-    <div class="form-outline">
-      <input type="text" class="form-control" id="validationCustom01" name="repassword" placeholder="Enter Your otp" required />
-      <div class="invalid-feedback"> Please Enter confirm password</div>
+      <div class="invalid-feedback">Enter email adddress</div>
     </div>
   </div>
   <div class="col-12">
-    <button type="submit">verify</button>
+    <button type="submit">send reset link</button>
+    
   </div>
+  <a  href="/login">back</a>
 </form>
       
-  
-      <script>
-        (() => {
-          'use strict';
-          const forms = document.querySelectorAll('.needs-validation');
 
-          Array.prototype.slice.call(forms).forEach((form) => {
-            form.addEventListener('submit', (event) => {
-              if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              form.classList.add('was-validated');
-            }, false);
-          });
-        })();
-      </script>
+
+ 
+<script>
+  form.addEventListener('submit', (e) => {
+  let message = [];
+  const emailInput = document.getElementById('email');
+  const errorElement = document.querySelector('.error');
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(emailInput.value.trim())) {
+      message.push('Email is invalid');
+    }
+     else if (emailInput.value.trim().length === 0) {
+        message.push('');
+      }
+
+    if (message.length > 0) {
+      e.preventDefault(); 
+      errorElement.innerText = message.join(', ');
+    }
+  });
+  </script>
+
+  
+
   
     </div>
   

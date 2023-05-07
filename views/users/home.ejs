@@ -10,7 +10,7 @@
                     <% banner.forEach(ele => {%>
                         
                   
-                    <div class="item bg-img cover-background pt-6 pb-12 pt-sm-6 pb-sm-14 py-md-16 py-lg-20 py-xxl-24" data-overlay-dark="0" data-background="/products_img/<%= ele.bannerImage  %>">
+                    <div class="item bg-img cover-background pt-6 pb-12 pt-sm-6 pb-sm-14 py-md-16 py-lg-20 py-xxl-24" data-overlay-dark="0" data-background="<%= ele.bannerImage  %>">
                         <div class="container pt-6 pt-sm-7 pt-md-0">
                             <div class="row align-items-center justify-content-center caption">
                                 <div class="col-md-10 col-lg-8 col-xl-6 py-sm-6 position-relative">
@@ -69,7 +69,7 @@
                                     height="640"
                                     muted="true"
                                     preload="metadata"
-                                    poster="benefits-of-coding.jpg">
+                                   >
                                         <source  src="/img/other/cathood.mp4" type="video/mp4">
                                       </video>
                           </a>
@@ -264,8 +264,8 @@
                             <div class="flex-grow-1 p-3">
                                 <h4 class="h6"><%= men.productname  %></a></h4>
                                 <div class="font-weight-700 display-29 mb-1">
-                                    <span class="text-primary">₹<%= men.offer_price  %></span>
-                                    <del>₹<%= men.price  %></del>
+                                    <span class="text-primary">₹<%= men.price  %></span>
+                                    <del>₹<%= men.offer_price  %></del>
                                 </div>
                                 <a href="/category/643a2f030df3e0d8ee669d33" class="font-weight-700 border-bottom text-uppercase small">Shop Now</a>
                             </div>
@@ -288,8 +288,8 @@
                             <div class="flex-grow-1 p-3">
                                 <h4 class="h6"><a href="/product_view?name=<%= women._id %>"><%= women.productname  %></a></h4>
                                 <div class="font-weight-700 display-29 mb-1">
-                                    <span class="text-primary">₹<%= women.offer_price  %></span>
-                                    <del>₹<%= women.price  %></del>
+                                    <span class="text-primary">₹<%= women.price  %></span>
+                                    <del>₹<%= women.offer_price  %></del>
                                 </div>
                                 <a href="/category/643a37b001cd4cf56db167b4" class="font-weight-700 border-bottom text-uppercase small">Shop Now</a>
                             </div>
@@ -312,8 +312,8 @@
                             <div class="flex-grow-1 p-3">
                                 <h4 class="h6"><a href="/product_view?name=<%= kid._id %>"><%= kid.productname  %></a></h4>
                                 <div class="font-weight-700 display-29 mb-1">
-                                    <span class="text-primary">₹<%= kid.offer_price  %></span>
-                                    <del>₹<%= kid.price  %></del>
+                                    <span class="text-primary">₹<%= kid.price  %></span>
+                                    <del>₹<%= kid.offer_price  %></del>
                                 </div>
                                 <a href="/category/643e4427c786425eae6d313f" class="font-weight-700 border-bottom text-uppercase small">Shop Now</a>
                             </div>

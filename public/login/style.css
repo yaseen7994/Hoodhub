@@ -63,6 +63,22 @@ p {
   background-color: #f3f3f3;
 }
 
+.gohm{
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #6f4f9e;
+  border-radius: 4px;
+  background-color: #6f4f9e;
+  color: #fff ;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.gohm:hover{
+  
+  color: #d2dae3;
+}
 
 button {
   display: block;

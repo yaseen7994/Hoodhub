@@ -2,7 +2,7 @@
 
         <!-- PAGE TITLE
         ================================================== -->
-        <section class="page-title-section bg-img cover-background">
+        <section class="page-title-section bg-img cover-background" data-background="/img/other/shop5.png">
             <div class="container">
 
                 <div class="title-info">
@@ -34,7 +34,7 @@
                                 <div class="text-center">
                                     <div class="pb-3">
                                         <img class="img-fluid rounded-circle img-thumbnail"
-                                            src="/userr/img/avatar/t-3.jpg" alt="...">
+                                            src="img/icons/user.png" alt="...">
                                     </div>
                                     <h6 id="reloadDiv" class="mb-0 display-28">
                                         <%= user.name %>
@@ -72,30 +72,23 @@
                             </div>
 
                             <form method="post" id="myform" action="/profile">
-
                                 <div class="row">
-
                                     <div class="col-sm-6">
-
                                         <div class="form-group">
                                             <label>Your Name</label>
                                             <input type="text" class="form-control" name="name"
                                                 value="<%= user.name %>">
                                             <div class="invalid " id="validation"></div>
                                         </div>
-
                                     </div>
 
                                     <div class="col-sm-6">
-
                                         <div class="form-group">
                                             <label>Email Address</label>
                                             <input type="email" class="form-control" name="email"
                                                 value="<%= user.email %>">
                                         </div>
-
                                     </div>
-
                                 </div>
 
                                 <div class="row">
@@ -134,7 +127,7 @@
 
                                 <button type="submit" class="butn-style2 mt-4">Update Profile</button>
                                 <button type="button" class="butn-style2 dark" data-bs-toggle="modal"
-                                    data-bs-target="#change_password" style="border: none;">Change Password </button>
+                                    data-bs-target="#change_password">Change Password </button>
                             </form>
 
                         </div>
@@ -144,7 +137,68 @@
                 </div>
             </div>
         </section>
+        <div class="modal fade" id="change_password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="password">
 
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="form-group">
+                                    <label>Old Password</label>
+                                    <input type="text" class="form-control" minlength="6" name="oldPassword" required>
+                                </div>
+
+                            </div>
+
+                            
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <input name="id" type="hidden">
+                                <div class="form-group">
+                                    <label>New password</label>
+                                    <input type="text" class="form-control" minlength="8" name="pass" required>
+                                </div>
+
+                            </div>
+
+                           <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Renter password</label>                                     
+                                    <input type="text" class="form-control" minlength="8" name="pas" required>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    
+
+                      
+
+                        <button type="submit" class="btn btn-dark float-end" data-bs-dismiss="modal">Save</button>
+
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
         </div>

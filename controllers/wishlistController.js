@@ -1,6 +1,7 @@
 const User = require('../Models/userModel')
 const Category = require('../Models/categoryModel')
 const Product = require('../Models/productModel')
+const baritems = require('../controllers/bar')
 
 
 
@@ -10,16 +11,14 @@ try {
     const id = req.session.user_id
     const user = await User.findOne({_id:id})
 
-    let cartbox = []
-    const productcart = await User.findOne({ _id: id }).populate('cart.product')
-    if (productcart && productcart.cart) {
-        cartbox = productcart.cart.slice(0,3)
-    }
+    const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(id) 
+
+
     const product = await User.findOne({_id:id}).populate('wishlist.product')
    
 
     const wishlist = product.wishlist
-    res.render('wishlist',{product,wishlist,category,user,session:id,cartbox})
+    res.render('wishlist',{product,wishlist,category,user,session:id,cartbox,cartlength,wishlistLength,wishbox})
 
 } catch (error) {
     res.render('500')
@@ -49,7 +48,7 @@ const add_wishlist = async(req,res)=>{
 
 const remove_from_wishlist = async(req,res)=>{
     try {
-        const product_id = req.body.product_id
+        const product_id = req.body.productId
         const id = req.session.user_id
         const data = await User.updateOne({_id:id},{$pull:{wishlist:{product:product_id}}})
         res.json({success:true})

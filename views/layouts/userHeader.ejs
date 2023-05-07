@@ -59,13 +59,13 @@
                             <% if(session!=null){ %>
                                 <ul class="top-nav ps-0">
                                     <li class="nav-item dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle"><i class="far fa-user"></i><span><%= user.username %></span></a>
+                                        <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle"><i class="far fa-user"></i><span><%= user.name %></span></a>
                                         
                                         <ul class="dropdown-menu p-4">
                                             <li class="mb-2">
                                                 <div class="media align-items-center">
-                                                    <img class="w-40px rounded-circle me-3" src="img/avatar/01.png" alt="...">
-                                                    <div class="media-body"><%= user.username %></div>
+                                                    <img class="w-40px rounded-circle me-3"  src="img/icons/user.png" alt="...">
+                                                    <div class="media-body"><%= user.name %></div>
                                                 </div>
     
                                             </li>
@@ -158,25 +158,42 @@
                                         <ul>
                                             
                                             <li class="dropdown me-3 me-lg-0">
-                                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                                <a href="" class="dropdown-toggle" data-bs-toggle="dropdown">
                                                     <i class="far fa-heart"></i>
-                                                    <span class="badge bg-primary">3</span>
+                                                    <span class="badge bg-primary"><%= wishlistLength %></span>
                                                 </a>
                                                 <ul class="dropdown-menu cart-list">
-                                                    <li>
-                                                        <a href="#" class="photo"><img src="img/products/cart-thumbs/cart-thumb-01.jpg" class="cart-thumb" alt="..." /></a>
-                                                        <h6><a href="#">Men's Football Boots </a></h6>
-                                                        <p>2x - <span class="price">$30.00</span></p>
+                                                    <% if(wishbox.length){  %>
+                                                   <%wishbox.forEach(i => {%>
+                                                     <li>   
+                                                    <a href="/wishlist" class="photo"><img src="<%= i.productImage[0] %>" class="cart-thumb" alt="..." /></a>
+                                                        <h6><a href="/wishlist"><%= i.productname %></a></h6>
+                                                        <p><span class="price"><%= i.price %></span></p>
                                                     </li>
-                                                    
-                                                   
+                                                 <%  })  %>
+                                                    <li class="total bg-primary">
+                                                        <span class="float-start"><strong>Items</strong>:<%= wishbox.length %></span>
+                                                        <a href="/wishlist" class="butn-style2 small white float-end w-auto"><span>Go to wishlist</span></a>
+                                                    </li>
+                                                    <% }else{ %>
+                                                        <li>   
+                                                            <a href="/wishlist" class="photo"><img src="img/other/wishlsit.gif" class="cart-thumb" alt="..." /></a>
+                                                                <h6><a href="/wishlist">Wishlist is Empty!..</a></h6>
+                                                            
+                                                            </li>
+                                                            <li class="total bg-primary">
+                                                                <span class="float-start"><strong>Items</strong>: <%= wishlistLength.length %></span>
+                                                                <a href="/shop" class="butn-style2 small white float-end w-auto"><span>Go to shop</span></a>
+                                                            </li>
+                                                            <% } %>
                                                 </ul>
+                                                
                                             </li>
                                  
                                              <li class="dropdown me-3 me-lg-0">
                                                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                                                     <i class="ti-bag"></i>
-                                                    <span class="badge bg-primary"><%= cartbox.length  %></span>
+                                                    <span class="badge bg-primary"><%= cartlength  %></span>
                                                 </a>
                                                 <ul class="dropdown-menu cart-list">
                                               

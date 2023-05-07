@@ -5,8 +5,9 @@ const Category = require('../Models/categoryModel')
 const Banner = require('../Models/bannerModel')
 const Coupon = require('../Models/couponModel')
 const Order = require('../Models/orderModel')
-
+const baritems =require('../controllers/bar')
 const nodemailer  = require('nodemailer')
+const randomstring = require('randomstring')
 
 
 
@@ -43,17 +44,19 @@ const sendVerifyMail = async (name, email, user_id) => {
                 pass: process.env.emailpass,
             }
         });
+      
         const mailOptions = {
-            from: "HoodHub@gmail.com",
+            from: "HoodHub12@gmail.com",
             to: email,
             subject: 'Verify Your Email',
-            html: '<p>Hello {{name}},</p>' +
+            html: '<p>Hello '+name+',</p>' +
             '<p>Thank you for registering an account with HoodHub.store! We\'re thrilled to have you as a member of our community. As a valued customer, we hope you\'ll love our products and services.</p>' +
             '<p>Before we get started, we need to verify your email address. Please click the link below to complete the verification process:</p>' +
-            '<p><a href="https://hoodhub.store/verify?id={{user_id}}">Verify your email address</a></p>' +
+            '<p><a href="http://hoodhub.store/verify?id='+user_id+'">Verify your email address</a></p>' +
             '<p>Thanks again for joining HoodHub.store. If you have any questions or concerns, please don\'t hesitate to reach out to us.</p>' +
             '<p>Best regards,</p>' +
-            '<p>The HoodHub.store Team</p>'
+            '<p>The HoodHub.store Team</p>'+
+            '<a href="http://hoodhub.store">Hoodhub.store</a></p>'
         }
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
@@ -63,10 +66,37 @@ const sendVerifyMail = async (name, email, user_id) => {
             }
         })
     } catch (error) {
-        res.render('500');
+        res.render('500');   
         console.log(error);
     }
 }
+
+const verifymail = async(req,res)=>{
+    try {
+        const updateInfo = await User.updateOne({ _id: req.query.id }, { $set: { is_verified: 1 } });
+        res.render('emailverify')
+    } catch (error) {
+        res.render('500')
+    }
+}
+
+const send_verfymail = async (req , res)=>{
+
+    try {
+       const name = req.body.name
+       const email = req.body.email
+       const id = req.body.id
+     sendVerifyMail( name , email , id );
+     res.json({success:true})
+
+    } catch (error) {
+
+                
+        res.render('500');
+        console.log(error.message); 
+
+    }
+} 
 
 // Loginpage and post----------------->
 
@@ -112,6 +142,18 @@ const getLogin = async(req,res)=>{
     }
 }
 
+const forgetload = async (req, res) => {
+    try {
+        res.render('forget')
+    } catch (error) {
+                
+        res.render('500');
+        console.log(error); 
+
+    }
+}
+
+
 const forgetverify = async (req, res) => {
     try {
         const email = req.body.email;
@@ -121,78 +163,58 @@ const forgetverify = async (req, res) => {
                 res.render('forget', { message: "Please verify your email" })
             } else {
                 const randomString = randomstring.generate();
-                const updatedData = await User.updateOne({ email: email }, { $set: { token: randomString } })
+                console.log(randomString);
+                await User.updateOne({ email: email }, { $set: { token: randomString } })
                 sendRestPassMail(userData.name, userData.email, randomString);
                 res.render('forget', { message: "Please check your mail to reset your password" })
             }
         } else {
-            res.render('forget', { message: "User email is incorrect" })
+            res.render('forget', { message: "Your email is not registered" })
         }
-
     } catch (error) {   
         res.render('500');
         console.log(error.message); 
     }
 }
+ 
 
 const forgetpasswordload = async (req, res) => {
-
     try {
-
         const token = req.query.token;
-
         const tokkenData = await User.find({ token: token })
-
-        console.log(tokkenData[0].email);
-
         if (tokkenData) {
             res.render('forget-password', { user: tokkenData[0]._id });
-
-
         } else {
-
             res.render('404', { message: "token is  invalid" })
         }
-    } catch (error) {
-                
+    } catch (error) {        
         res.render('500');
-        console.log(error.message); 
-
+        console.log(error); 
     }
 }
+
+
 const resetPassword = async (req, res) => {
     try {
-
         if (req.body.pass1 === req.body.pass2) {
-
             const spass = await securePassword(req.body.pass1)
-
             const user_id = req.params.id
-
             console.log(user_id);
-
-            const updatedData = await User.findByIdAndUpdate({ _id: user_id }, { $set: { pas: spass, pass: spass, token: '' } })
+            const updatedData = await User.findByIdAndUpdate({ _id: user_id }, { $set: { password: spass, token: '' } })
             if (updatedData) {
-
                 res.redirect('/login')
             }
             else {
-                console.log('hi');
+                res.render('forget-password', { message: "Something Wrong " });
             }
-
         } else {
-
             res.render('forget-password', { message: "both password is not same" });
-
         }
-
-    } catch (error) {
-                
+    } catch (error) { 
         res.render('500');
         console.log(error.message); 
 
     }
-
 }
 
 
@@ -243,7 +265,7 @@ const insertUser = async(req,res,next)=>{
 
 
 
-const verifyOtp = async (req, res, next) => {
+const verifyOtp = async (req, res) => {
     const otp = req.body.otp;
     try {
       const info = req.session.userData;
@@ -255,7 +277,6 @@ const verifyOtp = async (req, res, next) => {
         const passwordHash = await bcrypt.hash(info.password, 10); // hash the password with bcrypt
         const newUserData = new User({
           name: info.name,
-          username: info.username,
           email: info.email,
           number: info.number,
           password: passwordHash,
@@ -263,21 +284,23 @@ const verifyOtp = async (req, res, next) => {
           status: true,
         });
         const userData = await newUserData.save();
+       
         if (userData) {
           req.session.user_id = userData._id;
           res.redirect("/home"); 
           sendVerifyMail(userData.name,userData.email,userData._id);
-          console.log(sendVerifyMail);
         } else {
           const errorMessage = "";
           res.render("otp-enter", { errorMessage:'Entered Otp is Incorrect' });
         }
       }
     } catch (error) {
-      next(error.message);
       res.render("500");
+      console.log(error);
     }
   };
+
+
 
   const sendRestPassMail = async (name, email, token,) => {
     try {
@@ -293,13 +316,13 @@ const verifyOtp = async (req, res, next) => {
             }
         });
         const mailOptions = {
-            from: "HoodHub@gmail.com",
+            from: "HoodHub12@gmail.com",
             to: email,
             subject: 'Reset Your Password',
             html: '<p>Hello ' + name + ',</p>' +
                   '<p>We received a request to reset your password for your HoodHub.store account.</p>' +
                   '<p>Please click the link below to reset your password:</p>' +
-                  '<p><a href="https://hoodhub.shop/forget-password?token=' + token + '">Reset Your Password</a></p>' +
+                  '<p><a href="http://localhost:3000/forget-password?token=' + token + '">Reset Your Password</a></p>' +
                   '<p>If you did not make this request, please ignore this email and your password will remain unchanged.</p>' +
                   '<p>Thank you for using HoodHub.store!</p>' +
                   '<p>Best regards,</p>' +
@@ -319,6 +342,38 @@ const verifyOtp = async (req, res, next) => {
 }
 
 
+const change_password = async (req, res) => {
+    try {
+        
+        const id = req.session.user_id
+        const user = req.session.user
+        const old = req.body.oldPassword
+        const newpassword = req.body.pass
+        const repassword = req.body.pas
+        if (repassword == newpassword) {
+            const passwordMatch = await bcrypt.compare(old, user.password);
+            if (passwordMatch) {
+                const spass = await securePassword(newpassword);
+                const user = await User.updateOne({ _id: id }, { $set: { password: spass } });
+                
+
+                res.json({ success: true })
+            }else{
+
+                res.json({success:false})
+            }
+            
+
+
+        }
+
+    } catch (error) {
+                
+        res.render('500');
+        console.log(error.message); 
+
+    }
+}
 
 
 
@@ -328,20 +383,15 @@ const loadHome = async(req,res)=>{
         const product = await Product.find()
         const banner = await Banner.find({})
         const session = req.session.user_id
-        const user = await User.findOne({_id:req.session.user_id})
+        const user = await User.findOne({_id:session})
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
 
-        const menscategory  = await Product.find({category:"643a2f030df3e0d8ee669d33"}).populate('category').limit(3).sort({ _id: -1 });
-        const womencategory  = await Product.find({category:"643a37b001cd4cf56db167b4"}).populate('category').limit(3).sort({ _id: -1 });
-        const kidscategory  = await Product.find({category:"643e4427c786425eae6d313f"}).populate('category').limit(3).sort({ _id: -1 });
+        const menscategory  = await Product.find({category:"643a2f030df3e0d8ee669d33"}).populate('category').limit(5).sort({ _id: -1 });
+        const womencategory  = await Product.find({category:"643a37b001cd4cf56db167b4"}).populate('category').limit(5).sort({ _id: -1 });
+        const kidscategory  = await Product.find({category:"643e4427c786425eae6d313f"}).populate('category').limit(5).sort({ _id: -1 });
 
-   
         
-        let cartbox = []
-        const productcart = await User.findOne({ _id: session }).populate('cart.product')
-        if (productcart && productcart.cart) {
-            cartbox = productcart.cart.slice(0,3)
-        }
-        
+      
         res.render('home',{
             product,
             session,
@@ -350,9 +400,11 @@ const loadHome = async(req,res)=>{
             cartbox,
             menscategory,
             womencategory,
-            kidscategory
-
-
+            kidscategory,
+            wishbox,
+            wishlistLength,
+            cartlength
+        
         })
     } catch (error) {
         res.render('500')
@@ -360,6 +412,20 @@ const loadHome = async(req,res)=>{
     }
 }
 
+// address ---------------->
+const showAddress = async (req, res) => {
+    try {
+       
+        const session = req.session.user_id
+        const user = await User.find({ _id: session })
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
+        res.render('shipping', { user ,session,wishbox,wishlistLength,cartbox,cartlength  })
+
+    } catch (error) {
+        res.render('500');
+        console.log(error);
+    }
+}
 
 // aboutus--------------------->
 
@@ -371,12 +437,12 @@ const laodAbout = async(req,res)=>{
         const catcount = await Category.find().count()
         const productcount = await Product.find().count()
         const session = req.session.user_id
-        let cartbox = []
-        const productcart = await User.findOne({ _id: session }).populate('cart.product')
-        if (productcart && productcart.cart) {
-            cartbox = productcart.cart.slice(0,3)
-        }
-        res.render('aboutus',{session,user,cartbox,usercount,catcount,productcount})
+       
+        
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
+        
+
+        res.render('aboutus',{session,user,cartbox,usercount,catcount,productcount,cartlength,wishbox,wishlistLength})
     } catch (error) {
         res.render('500')
         console.log(error);
@@ -389,13 +455,10 @@ const laodContact = async(req,res)=>{
     try {
         const user = await User.findOne({_id:req.session.user_id})
         const session = req.session.user_id
-        let cartbox = []
-        const productcart = await User.findOne({ _id: session }).populate('cart.product')
-        if (productcart && productcart.cart) {
-            cartbox = productcart.cart.slice(0,3)
-        }
+        
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
 
-        res.render('contact-us',{session,user,cartbox})
+        res.render('contact-us',{session,user,cartbox,wishbox,wishlistLength,cartlength})
     } catch (error) {
         res.render('500')
         console.log(error);
@@ -440,7 +503,16 @@ module.exports={
     insertUser,
     verifyOtp,
     getLogin,
-    logout
+    logout,
+    verifymail,
+    forgetload,
+    forgetverify,
+    forgetpasswordload,
+    resetPassword,
+    send_verfymail,
+    showAddress,
+    change_password
+
 
 
 

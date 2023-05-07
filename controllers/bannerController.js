@@ -1,6 +1,11 @@
 const Banner = require('../Models/bannerModel');
 const { updateMany } = require('../Models/userModel');
-
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: "dlydqtq1k",
+    api_key: "452783757644622",
+    api_secret: "Jwkhc8ATV-P97soRkXLEZVCEHto"
+  });
 
 const show_banner = async(req,res)=>{
     try {
@@ -14,16 +19,21 @@ const show_banner = async(req,res)=>{
 const add_banner = async (req, res) => {
 
     try {
+
         const user = req.session.admin_id
         const title = req.body.title
-        const image = req.file
+        const image = req.file.path;
+        const uploadResponse = await cloudinary.uploader.upload(image);
+        const imageURL = uploadResponse.secure_url; 
+
         const sub_title = req.body.sub_title
         const caption = req.body.caption
 
         if (image && sub_title.trim() !== "" && title.trim() !== "" ) {
+
             const banner = new Banner({
                 title: title,
-                bannerImage: image.filename,
+                bannerImage: imageURL,
                 sub_title: sub_title,
                 caption : caption
             })

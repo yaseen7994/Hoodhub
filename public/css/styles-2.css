@@ -1181,7 +1181,7 @@ header .top-nav li i {
 }
 .product-buttons .btn-link {
   line-height: 38px;
-  padding: 0 13px;
+  padding: 0 11px;
   display: block;
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -1213,7 +1213,7 @@ header .top-nav li i {
 }
 .product-buttons ul li {
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 0px;
   vertical-align: middle;
 }
 .product-buttons ul li:last-child {

@@ -10,6 +10,7 @@ const Razorpay = require('razorpay')
 const uuid = require('uuid')
 const crypto = require("crypto");
 const { log } = require('console');
+const baritems = require('../controllers/bar')
 
 var instance = new Razorpay({
     key_id:process.env.KEY_ID,
@@ -23,13 +24,11 @@ const checkout = async(req,res)=>{
         const id = req.session.user_id
         const user = await User.find({_id:id}).populate("cart.product")
         const cart = await User.find({_id:id})
-        let cartbox = []
-        const productcart = await User.findOne({ _id: id }).populate('cart.product')
-        if (productcart && productcart.cart) {
-            cartbox = productcart.cart.slice(0,3)
-        }
+
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(id)
+
         if(cart[0].cart.length>0){
-            res.render('checkout',{user,session:id,cart,cartbox})
+            res.render('checkout',{user,session:id,cart,cartbox,wishbox,wishlistLength,cartlength})
         }else{
             res.redirect('/cart')
         }
@@ -274,12 +273,8 @@ const order_success = async (req, res) => {
       }
   
       const category = await Category.find();
-      let cartbox = []
-      const productcart = await User.findOne({ _id: user }).populate('cart.product')
-      if (productcart && productcart.cart) {
-          cartbox = productcart.cart.slice(0,3)
-      }
-      res.render("ordersuccess", { user, category, order, userdata,session:user ,cartbox});
+      const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session)
+      res.render("ordersuccess", { user, category, order, userdata,session:user ,cartbox,wishbox,wishlistLength,cartlength});
     } catch (error) {
   
       res.render('500');
@@ -294,12 +289,8 @@ const order_success = async (req, res) => {
       const user = await User.findOne({ _id: id });
       const orders = await Order.find({ userId: user });
       const category = await Category.find();
-      let cartbox = []
-      const productcart = await User.findOne({ _id: id }).populate('cart.product')
-      if (productcart && productcart.cart) {
-          cartbox = productcart.cart.slice(0,3)
-      }
-      res.render("list-orders", { user, category, orders,session:id ,cartbox});
+      const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(id)
+      res.render("list-orders", { user, category, orders,session:id ,cartbox,wishbox,wishlistLength,cartlength});
     } catch (error) {
       res.render('500');
       console.log(error);
@@ -338,6 +329,7 @@ const order_success = async (req, res) => {
       const user = req.session.admin_id
       const order = await Order.find().populate("userId")
       const user_id = await Order.find()
+      
       res.render('orderlist',{order,user,user_id})
     } catch (error) {
       console.log(error);
@@ -427,13 +419,9 @@ const view_order_user = async (req, res) => {
     );
     const id = req.session.user_id
 
-    let cartbox = []
-      const productcart = await User.findOne({ _id: id }).populate('cart.product')
-      if (productcart && productcart.cart) {
-          cartbox = productcart.cart.slice(0,3)
-      }
+    const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(id)
     
-  res.render("view-order", { order, user, category,session:id,cartbox });
+  res.render("view-order", { order, user, category,session:id,cartbox,cartlength,wishlistLength,wishbox });
   } catch (error) {
     console.log(error);
     res.render('500')

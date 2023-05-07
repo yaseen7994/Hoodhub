@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname,'public')))
 const useRoute = require('./routes/userRoute')
 app.use('/',useRoute)
 
-// For admin route------------->
+// For admin route-------------> 
 const adminRoute = require('./routes/adminRoute')
 app.use('/admin',adminRoute)
 

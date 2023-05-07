@@ -12,8 +12,10 @@ const show_cart = async (req, res) => {
         const totel = user.cartTotel
         const product = await User.findOne({ _id: id }).populate('cart.product')
         const cart = product.cart
+
         
-        res.render('cart', { product, cart, totel, user, category,session:id });
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session)
+        res.render('cart', { product, cart, totel, user, category,session:id,wishbox,wishlistLength });
 
     } catch (error) {
         console.log(error);

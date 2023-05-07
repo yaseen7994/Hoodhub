@@ -4,6 +4,7 @@ const Category = require('../Models/categoryModel')
 const Banner = require('../Models/bannerModel')
 const Coupon = require('../Models/couponModel')
 const Order = require('../Models/orderModel')
+const baritems = require('../controllers/bar')
 
 
 const userprofile = async(req,res)=>{
@@ -11,7 +12,8 @@ const userprofile = async(req,res)=>{
         const category = await Category.find({})
         const id = req.session.user_id
         const user = await User.findOne({_id:id})
-        res.render('profile',{user,category,session:id})
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(id) 
+        res.render('profile',{user,category,session:id,wishbox,wishlistLength,cartbox,cartlength})
     } catch (error) {
         console.log(error);
         res.render('500')
@@ -22,12 +24,8 @@ const add_address = async(req,res)=>{
     try {
         const user = await User.findOne({})
         const session = req.session.user_id
-        let cartbox = []
-        const productcart = await User.findOne({ _id: session }).populate('cart.product')
-        if (productcart && productcart.cart) {
-            cartbox = productcart.cart.slice(0,3)
-        }
-        res.render('addaddress',{session,cartbox,user})
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
+        res.render('addaddress',{session,wishbox,wishlistLength,cartbox,cartlength,user})
     } catch (error) {
         console.log(error);
         res.render('500')
@@ -60,6 +58,7 @@ const insert_address = async(req,res)=>{
                 }}
                 )
         }else{
+          
             res.render('add_address',{message:'Fill your form'})
             console.log("Fill your form");
         }
@@ -79,12 +78,8 @@ const edit_address = async(req,res)=>{
       
 
         const session = req.session.user_id
-        let cartbox = []
-        const productcart = await User.findOne({ _id: session }).populate('cart.product')
-        if (productcart && productcart.cart) {
-            cartbox = productcart.cart.slice(0,3)
-        }
-        res.render('editaddress',{session,cartbox,user,address})
+        const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
+        res.render('editaddress',{session,wishbox,wishlistLength,cartbox,cartlength,user,address})
     } catch (error) {
        console.log(error); 
        res.render('500')
@@ -149,7 +144,6 @@ const deleteAddress = async (req, res) => {
     try {
       const session = req.session.user_id;
       const index = req.body.indexcn;
-      console.log(index);
       const deletedAddress = await User.updateOne(
         { _id: session },
         { $unset: { [`address.${index}`]: "" } }

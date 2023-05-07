@@ -9,7 +9,7 @@
 
         <!-- PAGE TITLE
 ================================================== -->
-        <section class="page-title-section bg-img cover-background" data-background="img/bg/page-title.jpg">
+<section class="page-title-section bg-img cover-background" data-background="/img/other/shop5.png">
             <div class="container">
 
                 <div class="title-info">
@@ -41,7 +41,7 @@
                                 <div class="text-center">
                                     <div class="pb-3">
                                         <img class="img-fluid rounded-circle img-thumbnail"
-                                            src="/img/avatar/t-3.jpg" alt="...">
+                                            src="img/icons/user.png" alt="...">
                                     </div>
                                     <h6 class="mb-0 display-28">
                                         <%= user.name %>
@@ -56,14 +56,14 @@
                             <div class="list-group">
                                 <a class="list-group-items active" href="/orders"><i
                                         class="ti-bag pe-2"></i>Orders<span
-                                        class="badge badge-pill"><%=orders.length  %> </span></a>
+                                        class="badge badge-pill"></span></a>
                                 <a class="list-group-items" href="/profile"><i
                                         class="ti-user pe-2"></i>Profile</a>
                                 <a class="list-group-items" href="/address"><i
                                         class="ti-location-pin pe-2"></i>Addresses</a>
                                 <a class="list-group-items" href="/wishlist"><i
                                         class="ti-heart pe-2"></i>Wishlist<span
-                                        class="badge badge-pill">3</span></a>
+                                        class="badge badge-pill"></span></a>
                             </div>
 
                         </div>
@@ -159,8 +159,12 @@
                                                     </td>
                                                 </tr>
                                                 <%} }) }else{ %>
-                                                    <img src="/img/content/no orders.jpg" alt=""
-                                                        srcset="">
+                                                    <div class="text-center">
+                                    <img style="width: 200px; height: auto;" src="/img/other/noorder.gif" alt=""
+                                    >
+                                    <h5>No Items.!</h5>
+                                    <a  class="butn-style2 small"  href="/shop">continue Shoping</a>
+                                    </div>
                                                     <% } %>
 
                                         </tbody>

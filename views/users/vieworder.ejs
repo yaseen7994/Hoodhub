@@ -10,7 +10,7 @@
 
         <!-- PAGE TITLE
 ================================================== -->
-        <section class="page-title-section bg-img cover-background" data-background="img/bg/page-title.jpg">
+<section class="page-title-section bg-img cover-background" data-background="/img/other/shop5.png">
             <div class="container">
 
                 <div class="title-info">
@@ -85,7 +85,7 @@
       <br><br>
 
 
-      <div class="card">
+      
         <br>
         <div class="table-responsive text-nowrap">
           <table class="table">
@@ -96,7 +96,7 @@
                
               <tr>
                 <td><strong>
-                  <img src="/products_img/<%= x.productid.productImage[0] %>" alt=""
+                  <img src="<%= x.productid.productImage[0] %>" alt=""
                         style="width: 50px; height: 50px;">
                   </strong></td>
                 <td><strong>
@@ -116,7 +116,7 @@
             </tbody>
           </table>
         </div>
-      </div>
+      
       <br>
       <% if(order[0].status == "Return Pending" || order[0].status == "Retrun"){ %>
 
