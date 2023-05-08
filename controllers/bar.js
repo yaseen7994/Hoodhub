@@ -11,6 +11,7 @@ exports. homebar=async ( session)=> {
     
 
     const wishlistLength = wishlist && wishlist.wishlist ? wishlist.wishlist.length : 0;
+   
     
     
     let cartbox = []
