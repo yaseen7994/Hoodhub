@@ -16,7 +16,7 @@ const show_cart = async (req, res) => {
 
         
         const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(id)
-        res.render('cart', { product, cart, totel, user, category,session:id,wishbox,wishlistLength });
+        res.render('cart', { product, cart, totel, user, category,session:id,wishbox,wishlistLength,cartbox,cartlength});
 
     } catch (error) {
         console.log(error);

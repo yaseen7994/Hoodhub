@@ -52,6 +52,6 @@ app.use('/admin',adminRoute)
 
 
 // Server running------------->
-app.listen(3001,function(){
+app.listen(3000,function(){
     console.log('3000 server running...')
 })

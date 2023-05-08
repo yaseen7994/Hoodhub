@@ -322,7 +322,7 @@ const verifyOtp = async (req, res) => {
             html: '<p>Hello ' + name + ',</p>' +
                   '<p>We received a request to reset your password for your HoodHub.store account.</p>' +
                   '<p>Please click the link below to reset your password:</p>' +
-                  '<p><a href="http://localhost:3000/forget-password?token=' + token + '">Reset Your Password</a></p>' +
+                  '<p><a href="http://hoodhub.store/forget-password?token=' + token + '">Reset Your Password</a></p>' +
                   '<p>If you did not make this request, please ignore this email and your password will remain unchanged.</p>' +
                   '<p>Thank you for using HoodHub.store!</p>' +
                   '<p>Best regards,</p>' +

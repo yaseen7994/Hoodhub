@@ -28,9 +28,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
     crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.3.js"
-    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -53,8 +50,8 @@
                         <div class="col-3 col-md-6">
                             <div class="top-bar-info">
                                 <ul class="ps-0">
-                                    <li><a href="tel:01234567890"><i class="ti-mobile"></i><span class="d-none d-md-inline-block ps-2">7994515578</span></a></li>
-                                    <li><a href="mailto:addyour@emailhere"><i class="ti-email"></i><span class="d-none d-md-inline-block ps-2">HoodHub12@emailhere</span></a></li>
+                                    <li><a href="tel:7994515578"><i class="ti-mobile"></i><span class="d-none d-md-inline-block ps-2">7994515578</span></a></li>
+                                    <li><a href="mailto:yaseenap148gmail.com"><i class="ti-email"></i><span class="d-none d-md-inline-block ps-2">HoodHub12@gmail.com</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -62,13 +59,13 @@
                             <% if(session!=null){ %>
                                 <ul class="top-nav ps-0">
                                     <li class="nav-item dropdown">
-                                        <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle"><i class="far fa-user"></i><span><%= user.username %></span></a>
+                                        <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle"><i class="far fa-user"></i><span><%= user.name %></span></a>
                                         
                                         <ul class="dropdown-menu p-4">
                                             <li class="mb-2">
                                                 <div class="media align-items-center">
-                                                    <img class="w-40px rounded-circle me-3" src="img/avatar/01.png" alt="...">
-                                                    <div class="media-body"><%= user.username %></div>
+                                                    <img class="w-40px rounded-circle me-3"  src="img/icons/user.png" alt="...">
+                                                    <div class="media-body"><%= user.name %></div>
                                                 </div>
     
                                             </li>
@@ -124,50 +121,85 @@
                                             
                                             </li>
                                         </li>
-
+                                        <% if(session!=null){ %>
+                                            <li><a href="/contact">Contact</a>
                                         <li><a href="/profile">Account</a>
                                             <ul>
-                                                <% if(session!=null){ %>
+                                                
                                                     <li><a href="/logout">Logout</a></li>
-                                                    <li><a href="">Orders List</a></li>
-                                                    <li><a href="">Wishlist</a></li>
-                                                    <li><a href="">Profile Page</a></li>
-                                                    <li><a href="">Shipping Address</a></li>
+                                                    <li><a href="/orders">Orders List</a></li>
+                                                    <li><a href="/wishlist">Wishlist</a></li>
+                                                    <li><a href="/profile">Profile Page</a></li>
+                                                    <li><a href="/address">Shipping Address</a></li>
+                                            </ul>
+                                            </li>
+                                           
                                                 <% }else{ %>
+                                        <li><a href="/contact">Contact</a>
+                                         <li><a href="/login">Login</a>
+                                                        <ul>
                                                     <li><a href="/login">Login</a></li>
                                                     <li><a href="/signup">Signup</a></li>
-                                                    <% } %>
+                                                  
                                                 
                                             </ul>
                                         </li>
                                         </li>
-                                        <li><a href="/contact">Contact</a>
+                                        
+                                            <% } %>   
                                             
                                     </ul>
 
                                     <!-- end menu area -->
 
-                                    <!-- attribute navigation -->
+                                    
+                                    <% if(session!=null){ %>
                                     <div class="attr-nav">
                                         <ul>
                                             
                                             <li class="dropdown me-3 me-lg-0">
-                                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                                <a href="" class="dropdown-toggle" data-bs-toggle="dropdown">
                                                     <i class="far fa-heart"></i>
-                                                    <span class="badge bg-primary">3</span>
+                                                    <span class="badge bg-primary"><%= wishlistLength %></span>
                                                 </a>
                                                 <ul class="dropdown-menu cart-list">
-                                                    <li>
-                                                        <a href="#" class="photo"><img src="img/products/cart-thumbs/cart-thumb-01.jpg" class="cart-thumb" alt="..." /></a>
-                                                        <h6><a href="#">Men's Football Boots </a></h6>
-                                                        <p>2x - <span class="price">$30.00</span></p>
+                                                    <% if(wishbox.length){  %>
+                                                   <%wishbox.forEach(i => {%>
+                                                     <li>   
+                                                    <a href="/wishlist" class="photo"><img src="<%= i.productImage[0] %>" class="cart-thumb" alt="..." /></a>
+                                                        <h6><a href="/wishlist"><%= i.productname %></a></h6>
+                                                        <p><span class="price"><%= i.price %></span></p>
                                                     </li>
-                                                    
-                                                   
+                                                 <%  })  %>
+                                                    <li class="total bg-primary">
+                                                        <span class="float-start"><strong>Items</strong>:<%= wishbox.length %></span>
+                                                        <a href="/wishlist" class="butn-style2 small white float-end w-auto"><span>Go to wishlist</span></a>
+                                                    </li>
+                                                    <% }else{ %>
+                                                        <li>   
+                                                            <a href="/wishlist" class="photo"><img src="img/other/wishlsit.gif" class="cart-thumb" alt="..." /></a>
+                                                                <h6><a href="/wishlist">Wishlist is Empty!..</a></h6>
+                                                            
+                                                            </li>
+                                                            <li class="total bg-primary">
+                                                                <span class="float-start"><strong>Items</strong>: <%= wishlistLength %></span>
+                                                                <a href="/shop" class="butn-style2 small white float-end w-auto"><span>Go to shop</span></a>
+                                                            </li>
+                                                            <% } %>
                                                 </ul>
+                                                
                                             </li>
+                                 
+                                          
+                                              
+                                                   
 
-                                         
+                                                    
+                                                        <% } %>
+                                                           
+                                            
+                                            
+                                           
                                         </ul>
                                     </div>
                                     <!-- end attribute navigation -->
