@@ -123,7 +123,7 @@ const getLogin = async(req,res)=>{
                         res.redirect('/admin/dashboard')
                     }else{  
                         req.session.user_id = userData;
-                        res.redirect('/home')
+                        res.redirect('/')
                     }
                 }else{ 
                     res.render('login',{message:'Admin blocked your account'})
@@ -287,7 +287,7 @@ const verifyOtp = async (req, res) => {
        
         if (userData) {
           req.session.user_id = userData._id;
-          res.redirect("/home"); 
+          res.redirect("/"); 
           sendVerifyMail(userData.name,userData.email,userData._id);
         } else {
           const errorMessage = "";
