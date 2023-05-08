@@ -40,7 +40,9 @@ user_router.post('/verify_mail',auth.isLogin,userController.send_verfymail)
 
 
 // home----------------->
-user_router.get('/',auth.isLogin,userController.loadHome)
+user_router.get('/',userController.loadHome)
+user_router.get('/home',auth.isLogin,userController.loadHome)
+ 
 // about us--------------->
 user_router.get('/aboutus',userController.laodAbout)
 

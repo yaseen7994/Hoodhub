@@ -15,13 +15,13 @@ const loadLogin = async(req,res)=>{
     try {
         res.render('login')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
 
 
-const verifyLogin = async (req,res) => {
+const verifyLogin = async (req, res) => {
     try {
         const email = req.body.email;
         const pass = req.body.password;
@@ -43,7 +43,7 @@ const verifyLogin = async (req,res) => {
             res.render('login', { message: "Email and password is incorrect !" })
         }
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -149,7 +149,7 @@ const Dash = async(req,res)=>{
             wallet_percentage
         })
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -160,7 +160,7 @@ const salesReportload = async (req , res )=>{
         const saleData = ""
         res.render('sales-report',{user , saleData})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -188,7 +188,7 @@ const salesreport = async(req,res)=>{
         res.render('sales-report',{saleData,user})
     }
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -199,7 +199,7 @@ const adminLogin = async(req,res)=>{
     try {
         res.render('login')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -210,7 +210,7 @@ const logout = async(req,res)=>{
         req.session.admin_id = null
         res.redirect('/admin')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -222,7 +222,7 @@ const userlist = async(req,res)=>{
         const userData = await Admin.find({is_admin:0})
         res.render('userlist',{users:userData})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -233,7 +233,7 @@ const blockuser = async(req,res)=>{
         const userData = await Admin.findByIdAndUpdate({_id:userId},{$set:{status:false}})
         res.redirect('/admin/userlist')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -244,7 +244,7 @@ const unblockuser = async(req,res)=>{
         const userData = await Admin.findByIdAndUpdate({_id:userId},{$set:{status:true}})
         res.redirect('/admin/userlist')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }

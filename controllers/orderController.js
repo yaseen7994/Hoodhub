@@ -33,7 +33,7 @@ const checkout = async(req,res)=>{
             res.redirect('/cart')
         }
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -93,7 +93,7 @@ const apply_coupon = async(req,res)=>{
             res.json({ invalid: true });
           }
     } catch (error) {
-      // console.log(error);  
+      console.log(error);  
       res.render('500')
     }
   }
@@ -118,7 +118,7 @@ const apply_coupon = async(req,res)=>{
             res.json({ notfound: true });
         }
     } catch (error) {
-      // console.log(error);  
+      console.log(error);  
       res.render('500')
     }
   }
@@ -219,7 +219,7 @@ const apply_coupon = async(req,res)=>{
     }
     
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
   }
@@ -246,7 +246,7 @@ const verify_payment = async(req,res)=>{
             res.json({failed:true})
         }
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -278,7 +278,7 @@ const order_success = async (req, res) => {
     } catch (error) {
   
       res.render('500');
-      // console.log(error);
+      console.log(error);
   
     }
   };
@@ -293,7 +293,7 @@ const order_success = async (req, res) => {
       res.render("list-orders", { user, category, orders,session:id ,cartbox,wishbox,wishlistLength,cartlength});
     } catch (error) {
       res.render('500');
-      // console.log(error);
+      console.log(error);
     }
   
   };
@@ -320,7 +320,7 @@ const order_success = async (req, res) => {
       }
     } catch (error) {
       res.render('500');
-      // console.log(error);
+      console.log(error);
     }
   };
 
@@ -332,7 +332,7 @@ const order_success = async (req, res) => {
       
       res.render('orderlist',{order,user,user_id})
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       res.render('500')
     }
   }
@@ -369,7 +369,7 @@ const view_order_admin = async(req,res)=>{
     res.render('view-order',{user,order,user_id})
 
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     res.render('500')
   }
 }
@@ -386,7 +386,7 @@ const updateStatus = async (req, res) => {
     );
     res.json({ success: true });
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     res.render('500')
   }
 };
@@ -402,7 +402,7 @@ const confirm_return = async(req,res)=>{
       {$set:{status:status}}
     );
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     res.render('500')
   }
 }
@@ -423,7 +423,7 @@ const view_order_user = async (req, res) => {
     
   res.render("view-order", { order, user, category,session:id,cartbox,cartlength,wishlistLength,wishbox });
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     res.render('500')
   }
 };

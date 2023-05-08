@@ -11,7 +11,7 @@ const show_banner = async(req,res)=>{
     try {
         res.render('addbanner')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -46,7 +46,7 @@ const add_banner = async (req, res) => {
             res.render('addbanner', { message: "fill your form", user })
         }
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -56,7 +56,7 @@ const show_banner_list = async(req,res)=>{
         const bannerData = await Banner.find()
         res.render('list-banner',{banner:bannerData})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -67,7 +67,7 @@ const delete_banner = async(req,res)=>{
         const data = await Banner.deleteOne({_id:bannerid})
         res.json({ success: true })
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -78,7 +78,7 @@ const editbanerload = async(req,res)=>{
         const banneredit = await Banner.findOne({_id:id})
         res.render('edit-banner',{banneredit})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -106,7 +106,7 @@ const edit_banner = async(req,res)=>{
         }
 
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }

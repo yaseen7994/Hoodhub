@@ -85,7 +85,7 @@ const add_to_cart = async (req, res) => {
 
     } catch (error) {        
         res.render('500');
-        // console.log(error); 
+        console.log(error); 
     }
 }
 

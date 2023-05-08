@@ -19,7 +19,7 @@ const show_cart = async (req, res) => {
         res.render('cart', { product, cart, totel, user, category,session:id,wishbox,wishlistLength });
 
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -51,7 +51,7 @@ const add_cart = async (req, res) => {
 
 
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -68,7 +68,7 @@ const delete_cart = async (req, res) => {
         console.log("okk");
         await user.save();
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -108,7 +108,7 @@ const Qtychange = async (req, res) => {
         }
 
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }

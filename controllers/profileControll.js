@@ -15,7 +15,7 @@ const userprofile = async(req,res)=>{
         const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(id) 
         res.render('profile',{user,category,session:id,wishbox,wishlistLength,cartbox,cartlength})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -27,7 +27,7 @@ const add_address = async(req,res)=>{
         const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
         res.render('addaddress',{session,wishbox,wishlistLength,cartbox,cartlength,user})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -64,7 +64,7 @@ const insert_address = async(req,res)=>{
         }
       
     } catch (error) {
-      //  console.log(error); 
+       console.log(error); 
        res.render('500')
     }
 }
@@ -81,7 +81,7 @@ const edit_address = async(req,res)=>{
         const {wishbox,wishlistLength,cartbox,cartlength} = await baritems.homebar(session) 
         res.render('editaddress',{session,wishbox,wishlistLength,cartbox,cartlength,user,address})
     } catch (error) {
-      //  console.log(error); 
+       console.log(error); 
        res.render('500')
     }
 
@@ -134,7 +134,7 @@ const updateaddress = async (req, res) => {
       
       }
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       res.render('500')
     }
   };
@@ -151,7 +151,7 @@ const deleteAddress = async (req, res) => {
       await User.updateOne({ _id: session }, { $pull: { address: null } });
       res.json({ success: true });
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       res.render('500')
     }
   };

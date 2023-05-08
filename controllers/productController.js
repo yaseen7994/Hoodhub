@@ -17,7 +17,7 @@ const loadAddproduct = async(req,res)=>{
         const category = await Category.find()
         res.render('addproduct',{category})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -49,7 +49,7 @@ const addProduct = async(req,res)=>{
             }
         }
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -59,7 +59,7 @@ const productlsit = async(req,res)=>{
         const product = await Product.find().populate('category')
         res.render('productlist',{product})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -74,7 +74,7 @@ const unlistproduct = async(req,res)=>{
         );
         res.redirect('/admin/productlist')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -89,7 +89,7 @@ const listproduct = async(req,res)=>{
         )
         res.redirect('/admin/productlist')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -100,7 +100,7 @@ const editproduct = async(req,res)=>{
         const product = await Product.findOne({_id:req.query.id}).populate('category')
         res.render('editproduct',{product,category})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -136,7 +136,7 @@ const updateproduct = async(req,res)=>{
         )
         res.redirect('/admin/productlist')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -160,7 +160,7 @@ const deleteimage = async(req,res)=>{
             res.redirect('/admin/editproduct?id='+productId)
     }
     catch (error){
-    //   console.log(error);
+      console.log(error);
       res.render('500')
     }
 }
@@ -184,7 +184,7 @@ const search_product = async (req , res )=>{
     } catch (error) {
 
         res.render('500');
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -223,7 +223,7 @@ const loadshop = async (req, res) => {
 
         res.render('shop', {session,user,category,category_name,countpro,coupon,product,cartbox,cartlength,wishbox,wishlistLength})
     } catch (error) {
-        // console.log(error); 
+        console.log(error); 
         res.render('500')
 
     }
@@ -261,7 +261,7 @@ const loadbycategory = async (req, res) => {
 
     } catch (error) {
        
-        // console.log(error); 
+        console.log(error); 
         res.render('500')
 
     }
@@ -297,7 +297,7 @@ const sort = async (req, res) => {
       res.render("product-list", { product, user });
     } catch (error) {
       res.render("500");
-    //   console.log(error);
+      console.log(error);
     }
   };
 
@@ -322,7 +322,7 @@ const product_view = async (req, res) => {
     
         res.render("productdetails", { product, user, category, products,session:req.session.user_id ,wishbox,wishlistLength,cartbox,cartlength});
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 };

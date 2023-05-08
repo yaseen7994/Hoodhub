@@ -26,7 +26,7 @@ const securePassword = async(password)=>{
         return passwordHash
     } catch (error) {
         res.render('500')
-        
+        console.log('error')
     }
 }
 
@@ -60,14 +60,14 @@ const sendVerifyMail = async (name, email, user_id) => {
         }
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                // console.log(error);
+                console.log(error);
             } else {
                 console.log("Email has been sent:-", info.response);
             }
         })
     } catch (error) {
         res.render('500');   
-        // console.log(error);
+        console.log(error);
     }
 }
 
@@ -105,7 +105,7 @@ const loginpage = async(req,res)=>{
         res.render('login')
     } catch (error) {
         res.render('500')
-        // console.log(error);
+        console.log(error);
     }
 }
 
@@ -123,7 +123,7 @@ const getLogin = async(req,res)=>{
                         res.redirect('/admin/dashboard')
                     }else{  
                         req.session.user_id = userData;
-                        res.redirect('/')
+                        res.redirect('/home')
                     }
                 }else{ 
                     res.render('login',{message:'Admin blocked your account'})
@@ -138,7 +138,7 @@ const getLogin = async(req,res)=>{
         }
     } catch (error) {
         res.render('500');
-        // console.log(error);
+        console.log(error);
     }
 }
 
@@ -148,7 +148,7 @@ const forgetload = async (req, res) => {
     } catch (error) {
                 
         res.render('500');
-        // console.log(error); 
+        console.log(error); 
 
     }
 }
@@ -173,7 +173,7 @@ const forgetverify = async (req, res) => {
         }
     } catch (error) {   
         res.render('500');
-        console.log(error.message); 
+        console.log(error); 
     }
 }
  
@@ -189,7 +189,7 @@ const forgetpasswordload = async (req, res) => {
         }
     } catch (error) {        
         res.render('500');
-        // console.log(error); 
+        console.log(error); 
     }
 }
 
@@ -225,7 +225,7 @@ const Signup = async(req,res)=>{
         res.render('signup')
     } catch (error) {
         res.render('500')
-        // console.log(error);
+        console.log(error);
         
     }
 }
@@ -254,9 +254,9 @@ const insertUser = async(req,res,next)=>{
         }
     } catch (error) {
         if (error.code === 429) {
-            res.render('/')
+            res.render('/home')
           }
-        // console.log(error);
+        console.log(error);
           next(error)
         
     }
@@ -296,7 +296,7 @@ const verifyOtp = async (req, res) => {
       }
     } catch (error) {
       res.render("500");
-    //   console.log(error);
+      console.log(error);
     }
   };
 
@@ -330,7 +330,7 @@ const verifyOtp = async (req, res) => {
           };
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                // console.log(error);
+                console.log(error);
             } else {
                 console.log("Email has been sent:-", info.response);
             }
@@ -380,6 +380,7 @@ const change_password = async (req, res) => {
 // Home page----------------->
 const loadHome = async(req,res)=>{
     try {
+       
         const product = await Product.find()
         const banner = await Banner.find({})
         const session = req.session.user_id
@@ -405,7 +406,7 @@ const loadHome = async(req,res)=>{
         })
     } catch (error) {
         res.render('500')
-        // console.log(error);
+        console.log(error);
     }
 }
 
@@ -420,7 +421,7 @@ const showAddress = async (req, res) => {
 
     } catch (error) {
         res.render('500');
-        // console.log(error);
+        console.log(error);
     }
 }
 
@@ -442,7 +443,7 @@ const laodAbout = async(req,res)=>{
         res.render('aboutus',{session,user,cartbox,usercount,catcount,productcount,cartlength,wishbox,wishlistLength})
     } catch (error) {
         res.render('500')
-        // console.log(error);
+        console.log(error);
     }
 }
 
@@ -458,7 +459,7 @@ const laodContact = async(req,res)=>{
         res.render('contact-us',{session,user,cartbox,wishbox,wishlistLength,cartlength})
     } catch (error) {
         res.render('500')
-        // console.log(error);
+        console.log(error);
     }
 }
 
@@ -468,7 +469,7 @@ const load404 = async(req,res)=>{
     try { 
         res.render('404')
     } catch (error) {
-    //    console.log(error); 
+       console.log(error); 
        res.render('500')
     }
 }
@@ -479,7 +480,7 @@ const logout = async(req,res)=>{
         req.session.user_id = null
       res.redirect('/login')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }

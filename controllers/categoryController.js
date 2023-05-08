@@ -8,7 +8,7 @@ const loadAddcategory = async(req,res)=>{
         const user = await User.findOne({_id:req.session.admin_id})
         res.render('addcategory',{user})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 
@@ -38,7 +38,7 @@ const addcategory = async (req, res) => {
         if (error.code === 11000) {
             res.render('addcategory',{message:'This category is already existed'})
           }
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 
@@ -52,7 +52,7 @@ const listCategory = async(req,res)=>{
         const category = await Category.find()
         res.render('categorylist',{category,user})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -64,7 +64,7 @@ const deleteCategory = async(req,res)=>{
         await Category.deleteOne({_id:id})
         res.redirect('/admin/categorylist')
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -76,7 +76,7 @@ const editCategory = async(req,res)=>{
         console.log(category);
         res.render('editcategory',{category:category,user})
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
@@ -104,7 +104,7 @@ const updatecategory = async(req,res)=>{
         if (error.code === 11000) {
             res.render('addcategory',{message:'This category is already existed'})
           }
-        // console.log(error);
+        console.log(error);
         res.render('500')
     }
 }
